@@ -7,15 +7,21 @@
 //
 
 #import "FirstViewController.h"
+#import "FMMapKit.h"
 
-@interface FirstViewController ()
-
+@interface FirstViewController () <FMKMapViewDelegate>
+@property (nonatomic,strong) FMKMapView *mapView;
 @end
 
 @implementation FirstViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 通过地图ID初始化地图视图
+    self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
+    [self.view addSubview:_mapView];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
