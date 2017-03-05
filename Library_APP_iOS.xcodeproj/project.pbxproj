@@ -23,12 +23,16 @@
 		3D5D4D0D1E67C8BB00977194 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5D4D0C1E67C8BB00977194 /* Security.framework */; };
 		3D5D4D0E1E67C99800977194 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5D4CC31E67C6FC00977194 /* libFMMapKit.a */; };
 		3D5D4D0F1E67C9A300977194 /* libFMMapKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5D4CFC1E67C6FC00977194 /* libFMMapKit.a */; };
-		3D807B551E68109B0013E4B3 /* CSYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B501E68109B0013E4B3 /* CSYLoginViewController.m */; };
+		3D807B551E68109B0013E4B3 /* CSYLRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B501E68109B0013E4B3 /* CSYLRViewController.m */; };
 		3D807B561E68109B0013E4B3 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B521E68109B0013E4B3 /* FirstViewController.m */; };
 		3D807B571E68109B0013E4B3 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B541E68109B0013E4B3 /* SecondViewController.m */; };
 		3D807B601E6818020013E4B3 /* CSYLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B5E1E6818020013E4B3 /* CSYLoginView.m */; };
 		3D807B611E6818020013E4B3 /* CSYLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D807B5F1E6818020013E4B3 /* CSYLoginView.xib */; };
 		3D807B651E6818A00013E4B3 /* UIView+CSYBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B641E6818A00013E4B3 /* UIView+CSYBase.m */; };
+		3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */; };
+		3DCBB0251E6BED3600BC2392 /* CSYCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCBB0241E6BED3600BC2392 /* CSYCommonViewController.m */; };
+		3DCBB0421E6C138600BC2392 /* CSYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCBB0411E6C138600BC2392 /* CSYTabBarController.m */; };
+		3DCBB0451E6C155A00BC2392 /* CSYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCBB0441E6C155A00BC2392 /* CSYNavigationController.m */; };
 		54B0F1B27593C6AB651A716E /* libPods-Library_APP_iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEA13D597FC66A8E12AB596 /* libPods-Library_APP_iOSUITests.a */; };
 		A4F59EA6CD07AC04A7A95B8B /* libPods-Library_APP_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE016A1F331E4719D61A36D /* libPods-Library_APP_iOS.a */; };
 		C8107926B2F1B769C4136FEF /* libPods-Library_APP_iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F1C8F280FBAF6665914C8C /* libPods-Library_APP_iOSTests.a */; };
@@ -184,8 +188,8 @@
 		3D5D4D081E67C81C00977194 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3D5D4D0A1E67C8AF00977194 /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		3D5D4D0C1E67C8BB00977194 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		3D807B4F1E68109B0013E4B3 /* CSYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYLoginViewController.h; sourceTree = "<group>"; };
-		3D807B501E68109B0013E4B3 /* CSYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYLoginViewController.m; sourceTree = "<group>"; };
+		3D807B4F1E68109B0013E4B3 /* CSYLRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYLRViewController.h; sourceTree = "<group>"; };
+		3D807B501E68109B0013E4B3 /* CSYLRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYLRViewController.m; sourceTree = "<group>"; };
 		3D807B511E68109B0013E4B3 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		3D807B521E68109B0013E4B3 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		3D807B531E68109B0013E4B3 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
@@ -195,6 +199,14 @@
 		3D807B5F1E6818020013E4B3 /* CSYLoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSYLoginView.xib; sourceTree = "<group>"; };
 		3D807B631E68189F0013E4B3 /* UIView+CSYBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CSYBase.h"; sourceTree = "<group>"; };
 		3D807B641E6818A00013E4B3 /* UIView+CSYBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CSYBase.m"; sourceTree = "<group>"; };
+		3DBD41C51E6AA5FA00F7D7A4 /* CSYHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYHTTPClient.h; sourceTree = "<group>"; };
+		3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYHTTPClient.m; sourceTree = "<group>"; };
+		3DCBB0231E6BED3600BC2392 /* CSYCommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYCommonViewController.h; sourceTree = "<group>"; };
+		3DCBB0241E6BED3600BC2392 /* CSYCommonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYCommonViewController.m; sourceTree = "<group>"; };
+		3DCBB0401E6C138600BC2392 /* CSYTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYTabBarController.h; sourceTree = "<group>"; };
+		3DCBB0411E6C138600BC2392 /* CSYTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYTabBarController.m; sourceTree = "<group>"; };
+		3DCBB0431E6C155A00BC2392 /* CSYNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYNavigationController.h; sourceTree = "<group>"; };
+		3DCBB0441E6C155A00BC2392 /* CSYNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYNavigationController.m; sourceTree = "<group>"; };
 		45BBC9CEE942ECE710C140FD /* Pods-Library_APP_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Library_APP_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Library_APP_iOSUITests/Pods-Library_APP_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F0CE06461A2CCF4C6469B20 /* Pods-Library_APP_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Library_APP_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Library_APP_iOS/Pods-Library_APP_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5BE016A1F331E4719D61A36D /* libPods-Library_APP_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Library_APP_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +291,7 @@
 		3D5D4C531E67C67B00977194 /* Library_APP_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3DBD41C41E6AA5D700F7D7A4 /* Manager */,
 				3D807B4E1E68109B0013E4B3 /* ViewController */,
 				3D807B5A1E6818020013E4B3 /* View */,
 				3D5D4C571E67C67B00977194 /* AppDelegate.h */,
@@ -500,12 +513,18 @@
 		3D807B4E1E68109B0013E4B3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3D807B4F1E68109B0013E4B3 /* CSYLoginViewController.h */,
-				3D807B501E68109B0013E4B3 /* CSYLoginViewController.m */,
+				3D807B4F1E68109B0013E4B3 /* CSYLRViewController.h */,
+				3D807B501E68109B0013E4B3 /* CSYLRViewController.m */,
 				3D807B511E68109B0013E4B3 /* FirstViewController.h */,
 				3D807B521E68109B0013E4B3 /* FirstViewController.m */,
 				3D807B531E68109B0013E4B3 /* SecondViewController.h */,
 				3D807B541E68109B0013E4B3 /* SecondViewController.m */,
+				3DCBB0231E6BED3600BC2392 /* CSYCommonViewController.h */,
+				3DCBB0241E6BED3600BC2392 /* CSYCommonViewController.m */,
+				3DCBB0401E6C138600BC2392 /* CSYTabBarController.h */,
+				3DCBB0411E6C138600BC2392 /* CSYTabBarController.m */,
+				3DCBB0431E6C155A00BC2392 /* CSYNavigationController.h */,
+				3DCBB0441E6C155A00BC2392 /* CSYNavigationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -536,6 +555,15 @@
 				3D807B641E6818A00013E4B3 /* UIView+CSYBase.m */,
 			);
 			path = "UIView+CSYBase";
+			sourceTree = "<group>";
+		};
+		3DBD41C41E6AA5D700F7D7A4 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3DBD41C51E6AA5FA00F7D7A4 /* CSYHTTPClient.h */,
+				3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -823,12 +851,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */,
 				3D807B601E6818020013E4B3 /* CSYLoginView.m in Sources */,
 				3D807B651E6818A00013E4B3 /* UIView+CSYBase.m in Sources */,
 				3D807B571E68109B0013E4B3 /* SecondViewController.m in Sources */,
+				3DCBB0451E6C155A00BC2392 /* CSYNavigationController.m in Sources */,
 				3D5D4C591E67C67B00977194 /* AppDelegate.mm in Sources */,
+				3DCBB0421E6C138600BC2392 /* CSYTabBarController.m in Sources */,
 				3D807B561E68109B0013E4B3 /* FirstViewController.m in Sources */,
-				3D807B551E68109B0013E4B3 /* CSYLoginViewController.m in Sources */,
+				3DCBB0251E6BED3600BC2392 /* CSYCommonViewController.m in Sources */,
+				3D807B551E68109B0013E4B3 /* CSYLRViewController.m in Sources */,
 				3D5D4C561E67C67B00977194 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -979,7 +1011,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEVELOPMENT_TEAM = WWFAK93RQR;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Library_APP_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1003,7 +1037,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LIBRARY = "libstdc++";
 				DEVELOPMENT_TEAM = WWFAK93RQR;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Library_APP_iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

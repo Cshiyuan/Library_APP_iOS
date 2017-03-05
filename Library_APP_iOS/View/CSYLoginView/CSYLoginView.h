@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIView+CSYBase.h"
 
+
+typedef void(^LoginAction)(NSString*,NSString*);
+
 @interface CSYLoginView : UIView
 
 @property (weak, nonatomic) IBOutlet UITextField *userName;
@@ -16,5 +19,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 //+(instancetype)getCSYLoginView;
-
+-(void)setLoginAction:(LoginAction)action;
 @end

@@ -7,6 +7,8 @@ target 'Library_APP_iOS' do
 
   pod 'Masonry'
   pod 'AFNetworking', '~> 3.0'
+  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'SVProgressHUD'
 
 
   # Pods for Library_APP_iOS

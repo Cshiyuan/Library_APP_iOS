@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSYCommonViewController.h"
 
-@interface FirstViewController : UIViewController
+@interface FirstViewController : CSYCommonViewController
 
 
 @end
