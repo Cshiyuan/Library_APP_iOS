@@ -10,7 +10,13 @@
 
 @interface CSYCommonViewController : UIViewController
 
+- (void) dismissHUD;
+- (void) showSuccessHUDWithText:(NSString *) text;
+- (void) showSuccessHUDWithText:(NSString *)text duration:(float) duration;
+- (void) showErrorHUDWithText:(NSString *) text;
+- (void) showErrorHUDWithText:(NSString *) text duration:(float) duration;
+
+- (void) showLoadingHUDWithText:(NSString *) text;
 
 - (void)presentLoginViewController;
-
 @end

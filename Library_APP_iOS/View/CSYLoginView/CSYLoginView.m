@@ -9,7 +9,7 @@
 #import "CSYLoginView.h"
 #import "Masonry.h"
 
-@interface CSYLoginView()
+@interface CSYLoginView() <UITextFieldDelegate>
 {
     UIButton *_registerButton;
     LoginAction _loginAction;
@@ -53,58 +53,59 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_passWord];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_userName];
+        
+        self.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+        
+        [self addGestureRecognizer:singleTap];
+        
         
     }
     return self;
 }
+
 
 -(void)awakeFromNib
 {
     [super awakeFromNib];
     [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    _loginButton.userInteractionEnabled = NO;
+    _loginButton.alpha = 0.5;
+    
     _passWord.secureTextEntry = YES;
+    
+    _passWord.delegate = self;
+    _userName.delegate = self;
+    
+    
+    
 }
 
--(void)setLoginAction:(LoginAction)action
+#pragma -mark UITextFieldDelegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    if(action)
+   
+    
+    return YES;
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+
+    if(textField == _passWord)
     {
-        _loginAction = action;
+        [self loginAction:_loginButton];
+    } else {
+        [_passWord becomeFirstResponder];
     }
+    return YES;
 }
-
-///键盘显示事件
-- (void) keyboardWillShow:(NSNotification *)notification {
-    //获取键盘高度，在不同设备上，以及中英文下是不同的
-    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    
-    //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
-    CGFloat offset = (textView.frame.origin.y+textView.frame.size.height+10) - (self.frame.size.height - kbHeight);
-    
-    // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
-    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    //将视图上移计算好的偏移
-    if(offset > 0) {
-        [UIView animateWithDuration:duration animations:^{
-            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
-        }];
-    }
-}
-
-///键盘消失事件
-- (void) keyboardWillHide:(NSNotification *)notify {
-    // 键盘动画时间
-    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    //视图下沉恢复原状
-    [UIView animateWithDuration:duration animations:^{
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }];
-}
-
-
 
 //给子控件布局
 - (void)layoutSubviews
@@ -117,6 +118,7 @@
         
     }];
 }
+
 -(void)loginAction:(UIButton *)button
 {
     if(_loginAction)
@@ -124,6 +126,70 @@
         _loginAction(_userName.text,_passWord.text);
     }
 }
+
+
+
+
+-(void)setLoginAction:(LoginAction)action
+{
+    if(action)
+    {
+        _loginAction = action;
+    }
+}
+
+
+
+#pragma -mark NSNotification
+
+
+-(void)textFieldChanged:(UITextField*)textField
+{
+    if(![_passWord.text isEqualToString:@""] && ![_userName.text isEqualToString:@""])
+    {
+        _loginButton.userInteractionEnabled = YES;
+        _loginButton.alpha = 1.0;
+    }
+}
+
+-(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer
+{
+    
+    [self endEditing:YES];
+}
+
+///键盘显示事件
+- (void) keyboardWillShow:(NSNotification *)notification {
+    
+    CGFloat duration = [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    
+    CGRect keyboardRect = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    
+    CGFloat keyboardHeight = keyboardRect.origin.y;
+    
+//    NSLog(@"%@",self.frame);
+//    NSLog(@"%@",CGRectGetMaxY(self.frame));
+    
+    double bHeight = CGRectGetMaxY(self.frame) - keyboardHeight;
+    
+    if(bHeight > 0)
+    {
+        [UIView animateWithDuration:duration animations:^{
+            
+            self.transform = CGAffineTransformMakeTranslation(0, -bHeight);
+            
+        }];
+    }
+    
+
+}
+
+///键盘消失事件
+- (void) keyboardWillHide:(NSNotification *)notify {
+    
+    self.transform = CGAffineTransformIdentity;
+}
+
 
 
 

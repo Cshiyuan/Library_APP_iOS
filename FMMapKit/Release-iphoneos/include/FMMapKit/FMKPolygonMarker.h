@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, FMKPolygonMarkerType) {
  *
  *  @param color    矩形填充色
  *  @param width    矩形宽
- *  @param high     矩形高
+ *  @param height     矩形高
  *  @param position 中心位置
  *
  *  @return 矩形标注物

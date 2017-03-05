@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger, FMKMapCoordZType){
  @param frame frame
  @param mapID 地图ID
  @param target 地图代理
- @param antoUpgrade 是否自动更新地图数据
+ @param autoUpgrade 是否自动更新地图数据
 					若开启自动更新，则地图在加载过程中会自动加载服务器最新数据
 					自动更新也受- (BOOL)fmapHaveNewVersion:回调方法影响
  @return mapView
@@ -342,13 +342,13 @@ typedef NS_ENUM(NSInteger, FMKMapCoordZType){
 
 /*!
  @brief 当地图将要加载
- @param mapview 地图View对象
+ @param mapView 地图View对象
  */
 - (void)mapViewWillStartLoadingMap:(FMKMapView *)mapView;
 
 /*!
  @brief 地图加载完成
- @param mapview 地图View对象
+ @param mapView 地图View对象
  */
 - (void)mapViewDidFinishLoadingMap:(FMKMapView *)mapView;
 

@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, FMKStageType)
 /**
  *  插值器初始化
  *
- *  @param STAGE_TYPE 插值类型 默认使用USE_INOUT
+ *  @param stageType 插值类型 默认使用USE_INOUT
  *
  *  @return 插值器对象
  */
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, FMKStageType)
  *  @param goingTime    已运行时间
  *  @param start        起始值
  *  @param changed      改变量
- *  @param durationTime 持续时间
+ *  @param duration 持续时间
  *
  *  @return 计算插值
  */
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger, FMKStageType)
  *  @param goingTime    已运行时间
  *  @param start        起始值
  *  @param changed      改变量
- *  @param durationTime 持续时间
+ *  @param duration 持续时间
  *
  *  @return 计算插值
  */
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, FMKStageType)
  *  @param goingTime    已运行时间
  *  @param start        起始值
  *  @param changed      改变量
- *  @param durationTime 持续时间
+ *  @param duration 持续时间
  *
  *  @return 计算插值
  */

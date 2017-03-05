@@ -11,11 +11,4 @@
 
 @interface CSYLRViewController : CSYCommonViewController
 
-//Message Methods
-- (void) showLoadingHUDWithText:(NSString *) text;
-- (void) dismissHUD;
-- (void) showSuccessHUDWithText:(NSString *) text;
-
-
-
 @end

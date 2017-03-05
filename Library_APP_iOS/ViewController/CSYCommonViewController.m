@@ -26,7 +26,7 @@ float CSYHudLongDuration = 2.0f;
 
 NSString *const DMMultiShopSelectedShopChangedNotification = @"DMMultiShopSelectedShopChangedNotification";
 
-static const void *kDMLoadingHUDKey = "kDMLoadingHUDKey";
+//static const void *kDMLoadingHUDKey = "kDMLoadingHUDKey";
 
 
 

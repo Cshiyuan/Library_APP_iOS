@@ -38,7 +38,7 @@
 /**
  *  通过地图数据初始化查询
  *
- *  @param 蜂鸟地图数据路径
+ *  @param dataPath
  *
  *  @return FMKSearchAnalyser类型对象
  */

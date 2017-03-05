@@ -133,7 +133,7 @@ typedef NS_ENUM(int, FMKRouteCalculateResultType)
  *
  *  @param start           路径规划起点
  *  @param end             路径规划终点
- *  @param module          路径规划类型
+ *  @param routeSetting          路径规划类型
  *
  *  @return 路径规划计算结果
  */
@@ -146,7 +146,7 @@ typedef NS_ENUM(int, FMKRouteCalculateResultType)
  *
  *  @param start           路径规划起点
  *  @param end             路径规划终点
- *  @param module          路径规划类型
+ *  @param routeSetting          路径规划类型
  *  @param naviResults     路径规划结果，对象为FMKNaviResult型对象
  *
  *  @return 路径规划计算结果
