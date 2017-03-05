@@ -18,9 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+
+    
+    
     // 通过地图ID初始化地图视图
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
     [self.view addSubview:_mapView];
+    
+    // 通过主题ID设置主题，ID从蜂鸟官网开发资源中获取
+    [_mapView setThemeWithID:@"3002"];
     
 //    [self presentLoginViewController];
     
@@ -31,7 +38,14 @@
 {
     [super viewDidAppear:animated];
     
-    [self presentLoginViewController];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //    [userDefaults setBool:YES forKey:@"isLogin"];
+    BOOL isLogin = [userDefaults boolForKey:@"isLogin"];
+    
+    if (!isLogin) {
+        [self presentLoginViewController];
+    }
+    
 }
 
 

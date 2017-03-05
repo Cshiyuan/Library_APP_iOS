@@ -106,14 +106,11 @@
                     [self dismissHUD];
 
                     [self dismissViewControllerAnimated:YES completion:nil];
-//                  [self showSuccessHUDWithText:@"登录成功"];
-//                  UIViewController* mainController = [Main]
-                    //获取storyboard: 通过bundle根据storyboard的名字来获取我们的storyboard,
-//                    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//                    //由storyboard根据myView的storyBoardID来获取我们要切换的视图
-//                    UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"MainController"];
-//                    //由navigationController推向我们要推向的view
-//                    [self.navigationController pushViewController:myView animated:YES];
+                    
+                    
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults setBool:YES forKey:@"isLogin"];
+                    
                 }
                 else
                 {
