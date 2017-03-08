@@ -17,6 +17,6 @@
 - (void) showErrorHUDWithText:(NSString *) text duration:(float) duration;
 
 - (void) showLoadingHUDWithText:(NSString *) text;
-
+- (void)presentViewController:(UIViewController*)vc;
 - (void)presentLoginViewController;
 @end

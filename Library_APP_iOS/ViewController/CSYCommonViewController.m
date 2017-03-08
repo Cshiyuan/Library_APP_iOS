@@ -105,6 +105,21 @@ static NSOperationQueue *sRequestQueue = nil;
 
 }
 
+-(void)presentViewController:(UIViewController*)vc
+{
+    CSYNavigationController *nav = [[CSYNavigationController alloc] initWithRootViewController:vc];
+    [nav setNavigationBarHidden:YES animated:NO];
+    
+    if (self.navigationController) {
+        
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+        
+    } else {
+        
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

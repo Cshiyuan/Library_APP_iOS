@@ -20,7 +20,7 @@
     
 //    UIImage *backButtonBackgroundImage = [[UIImage imageNamed:@"cross"] imageWithColor:[UIColor whiteColor]];
     UIImage *backButtonBackgroundImage = [UIImage imageNamed:@"cross"];
-    backButtonBackgroundImage = [backButtonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backButtonBackgroundImage.size.width+1, 0, 0) resizingMode:UIImageResizingModeStretch];
+    backButtonBackgroundImage = [backButtonBackgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, backButtonBackgroundImage.size.width + 1, 0, 0) resizingMode:UIImageResizingModeStretch];
     
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonBackgroundImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     

@@ -1,29 +1,24 @@
 //
-//  CSYTabBarController.m
+//  CSYScanQRViewController.m
 //  Library_APP_iOS
 //
-//  Created by chenshyiuan on 2017/3/5.
+//  Created by chenshyiuan on 2017/3/8.
 //  Copyright © 2017年 chenshyiuan. All rights reserved.
 //
 
-#import "CSYTabBarController.h"
+#import "CSYScanQRViewController.h"
 
-@interface CSYTabBarController ()
+@interface CSYScanQRViewController ()
 
 @end
 
-@implementation CSYTabBarController
+@implementation CSYScanQRViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tabBar.barStyle = UIBarStyleDefault;
-    self.tabBar.tintColor = [UIColor cyanColor];
-//    self.tabBar.barTintColor = [UIColor redColor];
-    
-//    self.tabBar.alpha = 0.3;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
-//    [self presented]
 }
 
 - (void)didReceiveMemoryWarning {
