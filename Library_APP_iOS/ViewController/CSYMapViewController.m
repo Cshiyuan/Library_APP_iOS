@@ -10,6 +10,7 @@
 #import "FMMapKit.h"
 #import "Masonry.h"
 #import "CSYScanQRViewController.h"
+#import "CSYSearchBookViewController.h"
 
 @interface CSYMapViewController () <FMKMapViewDelegate>
 @property (nonatomic,strong) FMKMapView *mapView;
@@ -79,6 +80,26 @@
         make.height.equalTo(scanQRButton.mas_width);
     }];
     
+    
+    UIButton *searchBKButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    searchBKButton.backgroundColor = [UIColor redColor];
+    searchBKButton.alpha = 0.5;
+    searchBKButton.layer.cornerRadius = 10.0;
+    searchBKButton.titleLabel.font = [UIFont systemFontOfSize:11];
+    [searchBKButton setTitle:@"找书" forState:UIControlStateNormal];
+    [searchBKButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:searchBKButton];
+    
+    [searchBKButton addTarget:self action:@selector(searchBKButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [searchBKButton addTarget:self action:@selector(searchBKButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [searchBKButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(scanQRButton.mas_bottom).offset(-100);
+        make.right.equalTo(self.view.mas_right).offset(-10);
+        make.width.equalTo(self.view.mas_width).multipliedBy(0.1);
+        make.height.equalTo(scanQRButton.mas_width);
+    }];
+    
 }
 
 #pragma -mark 按钮响应事件
@@ -94,5 +115,19 @@
 {
     [btn setBackgroundColor:[UIColor blueColor]];
 }
+
+-(void)searchBKButtonTouchDown:(UIButton *)btn
+{
+    [btn setBackgroundColor:[UIColor grayColor]];
+    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
+    [self presentViewController:vc];
+    
+}
+
+-(void)searchBKButtonUpInside:(UIButton *)btn
+{
+    [btn setBackgroundColor:[UIColor blueColor]];
+}
+
 
 @end

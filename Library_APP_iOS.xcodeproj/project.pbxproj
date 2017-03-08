@@ -30,6 +30,7 @@
 		3D9061E41E6F984800FDC85C /* CSYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061E31E6F984800FDC85C /* CSYMapViewController.m */; };
 		3D9061E71E6FA23F00FDC85C /* CSYPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061E61E6FA23F00FDC85C /* CSYPersonViewController.m */; };
 		3D9061EA1E6FAD6200FDC85C /* CSYScanQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061E91E6FAD6200FDC85C /* CSYScanQRViewController.m */; };
+		3D9061ED1E6FB63700FDC85C /* CSYSearchBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061EC1E6FB63700FDC85C /* CSYSearchBookViewController.m */; };
 		3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */; };
 		3DCBB0251E6BED3600BC2392 /* CSYCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCBB0241E6BED3600BC2392 /* CSYCommonViewController.m */; };
 		3DCBB0421E6C138600BC2392 /* CSYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCBB0411E6C138600BC2392 /* CSYTabBarController.m */; };
@@ -202,6 +203,8 @@
 		3D9061E61E6FA23F00FDC85C /* CSYPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYPersonViewController.m; sourceTree = "<group>"; };
 		3D9061E81E6FAD6200FDC85C /* CSYScanQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYScanQRViewController.h; sourceTree = "<group>"; };
 		3D9061E91E6FAD6200FDC85C /* CSYScanQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYScanQRViewController.m; sourceTree = "<group>"; };
+		3D9061EB1E6FB63700FDC85C /* CSYSearchBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYSearchBookViewController.h; sourceTree = "<group>"; };
+		3D9061EC1E6FB63700FDC85C /* CSYSearchBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYSearchBookViewController.m; sourceTree = "<group>"; };
 		3DBD41C51E6AA5FA00F7D7A4 /* CSYHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYHTTPClient.h; sourceTree = "<group>"; };
 		3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYHTTPClient.m; sourceTree = "<group>"; };
 		3DCBB0231E6BED3600BC2392 /* CSYCommonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYCommonViewController.h; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 				3D9061E61E6FA23F00FDC85C /* CSYPersonViewController.m */,
 				3D9061E81E6FAD6200FDC85C /* CSYScanQRViewController.h */,
 				3D9061E91E6FAD6200FDC85C /* CSYScanQRViewController.m */,
+				3D9061EB1E6FB63700FDC85C /* CSYSearchBookViewController.h */,
+				3D9061EC1E6FB63700FDC85C /* CSYSearchBookViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -868,6 +873,7 @@
 				3DCBB0251E6BED3600BC2392 /* CSYCommonViewController.m in Sources */,
 				3D807B551E68109B0013E4B3 /* CSYLRViewController.m in Sources */,
 				3D5D4C561E67C67B00977194 /* main.m in Sources */,
+				3D9061ED1E6FB63700FDC85C /* CSYSearchBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
