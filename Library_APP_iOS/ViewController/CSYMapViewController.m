@@ -62,12 +62,17 @@
 -(void)p_setButton
 {
     UIButton *scanQRButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    scanQRButton.backgroundColor = [UIColor blueColor];
-    scanQRButton.alpha = 0.5;
+//    scanQRButton.backgroundColor = [UIColor blueColor];
+    scanQRButton.alpha = 0.6;
     scanQRButton.layer.cornerRadius = 10.0;
     scanQRButton.titleLabel.font = [UIFont systemFontOfSize:11];
+    scanQRButton.layer.borderWidth = 1.0;
+
+    [scanQRButton setImage:[UIImage imageNamed:@"focus"] forState:UIControlStateNormal];
+    [scanQRButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    
     [scanQRButton setTitle:@"扫码" forState:UIControlStateNormal];
-    [scanQRButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [scanQRButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.view addSubview:scanQRButton];
     
     [scanQRButton addTarget:self action:@selector(scanButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -76,15 +81,16 @@
     [scanQRButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).offset(-100);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.width.equalTo(self.view.mas_width).multipliedBy(0.1);
+        make.width.equalTo(self.view.mas_width).multipliedBy(0.12);
         make.height.equalTo(scanQRButton.mas_width);
     }];
     
     
     UIButton *searchBKButton = [UIButton buttonWithType:UIButtonTypeCustom];
     searchBKButton.backgroundColor = [UIColor redColor];
-    searchBKButton.alpha = 0.5;
+    searchBKButton.alpha = 0.6;
     searchBKButton.layer.cornerRadius = 10.0;
+    searchBKButton.layer.borderWidth = 1.0;
     searchBKButton.titleLabel.font = [UIFont systemFontOfSize:11];
     [searchBKButton setTitle:@"找书" forState:UIControlStateNormal];
     [searchBKButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -94,9 +100,9 @@
     [searchBKButton addTarget:self action:@selector(searchBKButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     
     [searchBKButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(scanQRButton.mas_bottom).offset(-100);
+        make.bottom.equalTo(scanQRButton.mas_bottom).offset(-50);
         make.right.equalTo(self.view.mas_right).offset(-10);
-        make.width.equalTo(self.view.mas_width).multipliedBy(0.1);
+        make.width.equalTo(self.view.mas_width).multipliedBy(0.12);
         make.height.equalTo(scanQRButton.mas_width);
     }];
     
