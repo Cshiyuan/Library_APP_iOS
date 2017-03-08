@@ -118,15 +118,18 @@
 
 -(void)searchBKButtonTouchDown:(UIButton *)btn
 {
+    
+    [self startLoadingWithIndicator];
     [btn setBackgroundColor:[UIColor grayColor]];
-    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
-    [self presentViewController:vc];
+//    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
+//    [self presentViewController:vc];
     
 }
 
--(void)searchBKButtonUpInside:(UIButton *)btn
+-(void)searchBKButtonTouchUpInside:(UIButton *)btn
 {
-    [btn setBackgroundColor:[UIColor blueColor]];
+    [self stopLoadingWithIndicator];
+    [btn setBackgroundColor:[UIColor redColor]];
 }
 
 

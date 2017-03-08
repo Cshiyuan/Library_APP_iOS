@@ -10,6 +10,10 @@
 
 @interface CSYCommonViewController : UIViewController
 
+
+-(void)startLoadingWithIndicator;
+-(void)stopLoadingWithIndicator;
+
 - (void) dismissHUD;
 - (void) showSuccessHUDWithText:(NSString *) text;
 - (void) showSuccessHUDWithText:(NSString *)text duration:(float) duration;

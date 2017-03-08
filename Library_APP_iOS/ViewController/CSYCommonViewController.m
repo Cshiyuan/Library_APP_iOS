@@ -34,6 +34,9 @@ static NSOperationQueue *sRequestQueue = nil;
 
 
 @interface CSYCommonViewController ()
+{
+    UIActivityIndicatorView *_indicator;
+}
 
 @end
 
@@ -41,6 +44,10 @@ static NSOperationQueue *sRequestQueue = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+   
+    
     // Do any additional setup after loading the view.
 }
 
@@ -48,6 +55,30 @@ static NSOperationQueue *sRequestQueue = nil;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark -loading METHODS
+-(void)startLoadingWithIndicator {
+    
+    if(!_indicator)
+    {
+        _indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        //设置显示位置
+        _indicator.center = self.view.center;
+        _indicator.color = [UIColor greenColor];
+        //将这个控件加到父容器中。
+         [self.view addSubview:_indicator];
+    }
+    [_indicator startAnimating];
+}
+
+-(void)stopLoadingWithIndicator {
+    
+    if (!_indicator) {
+        return;
+    }
+    [_indicator stopAnimating];
+}
+
+
 
 #pragma mark - Message METHODS
 - (void)showLoadingHUDWithText:(NSString *)text
