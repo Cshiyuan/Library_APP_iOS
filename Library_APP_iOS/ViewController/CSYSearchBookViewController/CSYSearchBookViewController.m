@@ -7,8 +7,11 @@
 //
 
 #import "CSYSearchBookViewController.h"
+#import "CSYHTTPClient.h"
 #import "BookInfo.h"
 #import "CSYBookInfoCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "CSYToolSet.h"
 
 
 #define cellIdentify @"BookInfoIdentifier"
@@ -18,6 +21,8 @@
     __weak IBOutlet UIButton *_crossButton;
     __weak IBOutlet UISearchBar *_searchBar;
     __weak IBOutlet UITableView *_bookTableView;
+    
+    NSMutableArray *_bookArray;
 }
 
 @end
@@ -26,6 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _bookArray = [[NSMutableArray alloc]init];
     
     [_crossButton addTarget:self action:@selector(crossButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -62,9 +69,7 @@
         
     }
     
-    cell.bKNameLabel.text = @"书名: dasd";
-    cell.bKPubNameLabel.text = @"出版社: 华纳师范大学";
-    cell.detailInfoLabel.text = @"作者: 201231,23.123  书架: asd";
+    [self configCell:cell With:_bookArray[indexPath.row]];
     
     return cell;
 }
@@ -72,11 +77,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return 1;
+    return _bookArray.count;
 }
 
-
-
+-(void)configCell:(CSYBookInfoCell*)cell With:(BookInfo*)bookInfo
+{
+    cell.bKNameLabel.text = [NSString stringWithFormat:@"书名: %@", bookInfo.bookName];
+    cell.bKPubNameLabel.text = [NSString stringWithFormat:@"出版社: %@", bookInfo.pubName];
+    cell.detailInfoLabel.text = [NSString stringWithFormat:@"作者: %@ 书架: %@", bookInfo.authors,bookInfo.slfName];
+    [cell.bKImageView sd_setImageWithURL:[NSURL URLWithString:bookInfo.cover_thumb_url] placeholderImage:nil];
+}
 
 #pragma -mark UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
@@ -86,6 +96,37 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"search : %@",searchBar.text);
+    [_searchBar resignFirstResponder];
+    [self startLoadingWithIndicator];
+    [[CSYHTTPClient defaultClient]getPath:Search_URL parameters:@{@"BookName":searchBar.text} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if (![responseObject isKindOfClass:[NSDictionary class]]) {
+
+        }
+        NSDictionary *responseDic = responseObject;
+        NSNumber *code = responseDic[@"data"][@"code"];
+        
+        if ([code isEqualToNumber:@200])
+        {
+            
+            
+            NSArray *datas = responseDic[@"data"][@"info"];
+            for(NSDictionary* book in datas)
+            {
+                BookInfo *info = [CSYToolSet getBookInfoWithDictionary:book];
+                [_bookArray addObject:info];
+            }
+            
+            [_bookTableView reloadData];
+        }
+        
+        [self stopLoadingWithIndicator];
+  
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          [self stopLoadingWithIndicator];
+        
+    }];
+    
 }
 
 
@@ -100,7 +141,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     UIView *view = (UIView *)[touch view];
-    if (view == self.view)
+    if (view == self.view || view == _bookTableView)
     {
         [_searchBar resignFirstResponder];
     }

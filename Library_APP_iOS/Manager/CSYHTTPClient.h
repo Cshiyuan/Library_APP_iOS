@@ -11,6 +11,10 @@
 
 #define LOG_DATA(d) NSLog(@"%@", [[NSString alloc] initWithData:(d) encoding:NSUTF8StringEncoding])
 #define LOGIN_URL @"LibraryAPI/Public/libraryapi/?service=User.LoginUser"
+#define Search_URL @"LibraryAPI/Public/libraryapi/?service=Book.GetBookInfoByBookName"
+#define Book_Image_URL @"http://119.29.186.160/LibraryWeb/Uploads/"
+
+
 typedef void(^HttpResponseTask)(NSURLSessionDataTask *, id);
 
 

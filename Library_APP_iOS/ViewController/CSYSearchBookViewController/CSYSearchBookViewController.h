@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSYCommonViewController.h"
 
-@interface CSYSearchBookViewController : UIViewController
+@interface CSYSearchBookViewController : CSYCommonViewController
 
 
 @end

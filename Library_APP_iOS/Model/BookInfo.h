@@ -12,12 +12,14 @@
 
 @property(nonatomic,strong)NSString *bookName;
 @property(nonatomic,strong)NSString *pubName;
-@property(nonatomic,strong)NSArray *authors;
+@property(nonatomic,strong)NSString *authors;
 @property(nonatomic,strong)NSString *cover_url;
 @property(nonatomic,strong)NSString *cover_thumb_url;
 @property(nonatomic,strong)NSString *category;
 @property(nonatomic,strong)NSString *slfName;
 
 @property(nonatomic,assign)BOOL isOnSlf;
+
+//+(instancetype)init
 
 @end

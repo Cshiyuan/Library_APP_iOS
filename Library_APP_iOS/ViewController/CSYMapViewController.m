@@ -33,6 +33,14 @@
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
     [self.view addSubview:_mapView];
     
+    
+//    UIGestureRecognizer* tag
+    
+//    _mapView addGestureRecognizer:<#(nonnull UIGestureRecognizer *)#>
+    
+    UITapGestureRecognizer *tagGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesMap)];
+    [_mapView addGestureRecognizer:tagGR];
+    
     // 通过主题ID设置主题，ID从蜂鸟官网开发资源中获取
     [_mapView setThemeWithID:@"3002"];
     [self p_setButton];
@@ -133,7 +141,7 @@
 
 -(void)scanButtonTouchUpInside:(UIButton *)btn
 {
-    [btn setBackgroundColor:[UIColor blueColor]];
+    [btn setBackgroundColor:[UIColor cyanColor]];
     CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
     [self presentViewController:vc];
 }
@@ -161,5 +169,9 @@
     return UIStatusBarStyleLightContent;
 }
 
-
+- (void)touchesMap
+{
+    [_searchBar resignFirstResponder];
+    NSLog(@"asd");
+}
 @end
