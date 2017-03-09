@@ -78,12 +78,17 @@
 
 
 
-
 #pragma -mark UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSLog(@"1");
 }
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"search : %@",searchBar.text);
+}
+
+
 
 -(void)crossButtonAction:(UIButton*)btn
 {

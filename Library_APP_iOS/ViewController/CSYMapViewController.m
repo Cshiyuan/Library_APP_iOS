@@ -13,6 +13,10 @@
 #import "CSYSearchBookViewController.h"
 
 @interface CSYMapViewController () <FMKMapViewDelegate>
+{
+    __weak IBOutlet UIView* _topStatusView;
+    __weak IBOutlet UISearchBar *_searchBar;
+}
 @property (nonatomic,strong) FMKMapView *mapView;
 
 -(void)p_setButton;
@@ -32,6 +36,19 @@
     // 通过主题ID设置主题，ID从蜂鸟官网开发资源中获取
     [_mapView setThemeWithID:@"3002"];
     [self p_setButton];
+    
+    [self.view bringSubviewToFront:_topStatusView];
+    [self.view bringSubviewToFront:_searchBar];
+    
+    //遍历出UISearchBar的背景，从父窗口remove掉
+    for (UIView *subview in [[_searchBar.subviews firstObject] subviews]) {
+        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+            [subview removeFromSuperview];
+        }
+    }
+    
+    //重新设置颜色
+    [_searchBar setBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
     
     //    [self presentLoginViewController];
     
@@ -136,6 +153,12 @@
     [btn setBackgroundColor:[UIColor redColor]];
     CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
     [self presentViewController:vc];
+}
+
+#pragma -mark 定制statusBar部分
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 

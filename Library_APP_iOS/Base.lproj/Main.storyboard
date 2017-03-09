@@ -20,13 +20,37 @@
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ryy-tU-Lh1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="22"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="x5V-z5-mWG"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="请输入书名" translatesAutoresizingMaskIntoConstraints="NO" id="mfR-gf-nEy">
+                                <rect key="frame" x="0.0" y="22" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ryy-tU-Lh1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="5cJ-Vr-u1O"/>
+                            <constraint firstAttribute="trailing" secondItem="Ryy-tU-Lh1" secondAttribute="trailing" id="eNS-NO-b6s"/>
+                            <constraint firstItem="Ryy-tU-Lh1" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="noR-vk-D7B"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="图书馆" image="discover" id="acW-dT-cKf"/>
+                    <connections>
+                        <outlet property="searchBar" destination="mfR-gf-nEy" id="viz-w6-0Ct"/>
+                        <outlet property="topStatusView" destination="Ryy-tU-Lh1" id="vrr-vS-QSR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="749.60000000000002" y="-308.09595202398805"/>
         </scene>
         <!--个人中心-->
         <scene sceneID="wg7-f3-ORb">
