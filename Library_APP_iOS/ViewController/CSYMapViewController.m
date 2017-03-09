@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "CSYScanQRViewController.h"
 #import "CSYSearchBookViewController.h"
+#import "UISearchBar+CSYBase.h"
 
 @interface CSYMapViewController () <FMKMapViewDelegate>
 {
@@ -34,9 +35,6 @@
     [self.view addSubview:_mapView];
     
     
-//    UIGestureRecognizer* tag
-    
-//    _mapView addGestureRecognizer:<#(nonnull UIGestureRecognizer *)#>
     
     UITapGestureRecognizer *tagGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesMap)];
     [_mapView addGestureRecognizer:tagGR];
@@ -48,19 +46,10 @@
     [self.view bringSubviewToFront:_topStatusView];
     [self.view bringSubviewToFront:_searchBar];
     
-    //遍历出UISearchBar的背景，从父窗口remove掉
-    for (UIView *subview in [[_searchBar.subviews firstObject] subviews]) {
-        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-            [subview removeFromSuperview];
-        }
-    }
-    
+
     //重新设置颜色
-    [_searchBar setBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
+    [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
     
-    //    [self presentLoginViewController];
-    
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -68,10 +57,8 @@
     [super viewDidAppear:animated];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    //    [userDefaults setBool:YES forKey:@"isLogin"];
     BOOL isLogin = [userDefaults boolForKey:@"isLogin"];
     
-//    if (!isLogin) {
     if(!isLogin){
         [self presentLoginViewController];
     }
@@ -81,7 +68,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)p_setButton
@@ -92,17 +78,11 @@
     scanQRButton.layer.cornerRadius = 10.0;
     scanQRButton.titleLabel.font = [UIFont systemFontOfSize:11];
     scanQRButton.layer.borderWidth = 1.0;
-
     [scanQRButton setImage:[UIImage imageNamed:@"focus"] forState:UIControlStateNormal];
     [scanQRButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-    
-//    [scanQRButton setTitle:@"扫码" forState:UIControlStateNormal];
-//    [scanQRButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.view addSubview:scanQRButton];
-    
     [scanQRButton addTarget:self action:@selector(scanButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [scanQRButton addTarget:self action:@selector(scanButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    
     [scanQRButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).offset(-100);
         make.right.equalTo(self.view.mas_right).offset(-10);
@@ -120,10 +100,8 @@
     [searchBKButton setTitle:@"找书" forState:UIControlStateNormal];
     [searchBKButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.view addSubview:searchBKButton];
-    
     [searchBKButton addTarget:self action:@selector(searchBKButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
     [searchBKButton addTarget:self action:@selector(searchBKButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    
     [searchBKButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(scanQRButton.mas_bottom).offset(-50);
         make.right.equalTo(self.view.mas_right).offset(-10);
@@ -149,15 +127,12 @@
 -(void)searchBKButtonTouchDown:(UIButton *)btn
 {
     
-    [self startLoadingWithIndicator];
     [btn setBackgroundColor:[UIColor grayColor]];
-
-    
+  
 }
 
 -(void)searchBKButtonTouchUpInside:(UIButton *)btn
 {
-    [self stopLoadingWithIndicator];
     [btn setBackgroundColor:[UIColor redColor]];
     CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
     [self presentViewController:vc];
@@ -171,7 +146,7 @@
 
 - (void)touchesMap
 {
+    //触碰地图的时候将_searchBar收起
     [_searchBar resignFirstResponder];
-    NSLog(@"asd");
 }
 @end

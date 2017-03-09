@@ -11,6 +11,7 @@
 #import "BookInfo.h"
 #import "CSYBookInfoCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UISearchBar+CSYBase.h"
 #import "CSYToolSet.h"
 
 
@@ -38,20 +39,11 @@
 
     _searchBar.delegate = self;
     
-    //遍历出UISearchBar的背景，从父窗口remove掉
-    for (UIView *subview in [[_searchBar.subviews firstObject] subviews]) {
-        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-            [subview removeFromSuperview];
-        }
-    }
-    
-    //重新设置颜色
-    [_searchBar setBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
+    //去掉边框并且设置颜色
+    [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
 
     _bookTableView.delegate = self;
     _bookTableView.dataSource = self;
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,8 +68,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return _bookArray.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%ld",(long)indexPath.row);
+    [_searchBar resignFirstResponder];
 }
 
 -(void)configCell:(CSYBookInfoCell*)cell With:(BookInfo*)bookInfo
@@ -87,6 +84,7 @@
     cell.detailInfoLabel.text = [NSString stringWithFormat:@"作者: %@ 书架: %@", bookInfo.authors,bookInfo.slfName];
     [cell.bKImageView sd_setImageWithURL:[NSURL URLWithString:bookInfo.cover_thumb_url] placeholderImage:nil];
 }
+
 
 #pragma -mark UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
@@ -130,23 +128,11 @@
 }
 
 
-
 -(void)crossButtonAction:(UIButton*)btn
 {
     [_searchBar resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-// 触摸背景，关闭键盘
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    UIView *view = (UIView *)[touch view];
-    if (view == self.view || view == _bookTableView)
-    {
-        [_searchBar resignFirstResponder];
-    }
-}
-
 
 #pragma -mark 定制statusBar部分
 -(UIStatusBarStyle)preferredStatusBarStyle
