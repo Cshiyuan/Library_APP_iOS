@@ -84,7 +84,25 @@
 #pragma -mark AVCaptureMetadataOutputObjectsDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
+    if(metadataObjects.count == 0 || metadataObjects == nil)
+    {
+        _qrCodeFrameView.frame = CGRectZero;
+        return;
+    }
     
+    //Get the metadata object
+    AVMetadataMachineReadableCodeObject *metadataObj = metadataObjects[0];
+    if (metadataObj.type == AVMetadataObjectTypeQRCode) {
+        AVMetadataObject *barCodeObject = [_videoPreviewLayer transformedMetadataObjectForMetadataObject:metadataObj];
+        
+        _qrCodeFrameView.frame = barCodeObject.bounds;
+        
+        if(metadataObj.stringValue != nil)
+        {
+            NSLog(@"%@",metadataObj.stringValue);
+        }
+        
+    }
 }
 
 -(void)crossButtonAction:(UIButton*)btn

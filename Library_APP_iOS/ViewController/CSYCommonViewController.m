@@ -63,7 +63,7 @@ static NSOperationQueue *sRequestQueue = nil;
         _indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         //设置显示位置
         _indicator.center = self.view.center;
-        _indicator.color = [UIColor blackColor];
+        _indicator.color = [UIColor grayColor];
         //将这个控件加到父容器中。
          [self.view addSubview:_indicator];
     }

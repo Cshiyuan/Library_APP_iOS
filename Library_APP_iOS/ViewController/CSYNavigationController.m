@@ -65,8 +65,8 @@
     return nil;
 }
 #pragma mark -定制StatusBarStyle
-- (UIViewController *)childViewControllerForStatusBarStyle{
-    return self.topViewController;
-}
+//- (UIViewController *)childViewControllerForStatusBarStyle{
+//    return self.topViewController;
+//}
 
 @end

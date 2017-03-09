@@ -112,14 +112,13 @@
 -(void)scanButtonTouchDown:(UIButton *)btn
 {
     [btn setBackgroundColor:[UIColor grayColor]];
-    CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
-    [self presentViewController:vc];
-    
 }
 
 -(void)scanButtonTouchUpInside:(UIButton *)btn
 {
     [btn setBackgroundColor:[UIColor blueColor]];
+    CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
+    [self presentViewController:vc];
 }
 
 -(void)searchBKButtonTouchDown:(UIButton *)btn
@@ -136,6 +135,8 @@
 {
     [self stopLoadingWithIndicator];
     [btn setBackgroundColor:[UIColor redColor]];
+    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
+    [self presentViewController:vc];
 }
 
 
