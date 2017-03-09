@@ -5,7 +5,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>需要摄像头权限来扫码啦</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

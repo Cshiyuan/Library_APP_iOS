@@ -14,6 +14,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CSYScanQRViewController">
             <connections>
                 <outlet property="_crossButton" destination="FPd-Y9-6HY" id="4i3-Fm-pkR"/>
+                <outlet property="_topStatusView" destination="fqv-lp-v6B" id="Sma-Zl-Hz3"/>
+                <outlet property="_topView" destination="sfX-94-P2p" id="l0j-ch-v3n"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6ui-7b-OWv"/>
             </connections>
         </placeholder>
@@ -39,7 +41,7 @@
                             <state key="normal" image="cross"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.21877165836275445" green="0.227979274611399" blue="0.18310192689302507" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="FPd-Y9-6HY" firstAttribute="leading" secondItem="sfX-94-P2p" secondAttribute="leading" constant="15" id="7mu-vj-zKg"/>
                         <constraint firstItem="7aX-P2-Bfx" firstAttribute="centerY" secondItem="sfX-94-P2p" secondAttribute="centerY" id="J84-9N-EMP"/>
@@ -47,12 +49,21 @@
                         <constraint firstItem="FPd-Y9-6HY" firstAttribute="centerY" secondItem="sfX-94-P2p" secondAttribute="centerY" id="fDk-5i-yQ1"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-lp-v6B">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                    <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="sfX-94-P2p" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="9Bm-J0-zHE"/>
+                <constraint firstItem="fqv-lp-v6B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="9Fq-UE-2AE"/>
                 <constraint firstItem="sfX-94-P2p" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.1" id="9lM-NE-mgb"/>
+                <constraint firstItem="fqv-lp-v6B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="AA0-I6-GQd"/>
+                <constraint firstItem="sfX-94-P2p" firstAttribute="top" secondItem="fqv-lp-v6B" secondAttribute="bottom" id="ABq-lD-gAE"/>
                 <constraint firstItem="sfX-94-P2p" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h9Z-RR-Wlu"/>
+                <constraint firstAttribute="trailing" secondItem="fqv-lp-v6B" secondAttribute="trailing" id="uRB-S0-6AU"/>
                 <constraint firstAttribute="trailing" secondItem="sfX-94-P2p" secondAttribute="trailing" id="yQz-cx-ldx"/>
             </constraints>
             <point key="canvasLocation" x="32" y="108"/>

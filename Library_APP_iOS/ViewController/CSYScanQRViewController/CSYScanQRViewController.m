@@ -11,9 +11,11 @@
 @interface CSYScanQRViewController () <AVCaptureMetadataOutputObjectsDelegate>
 {
     __weak IBOutlet UIButton *_crossButton;
-    AVCaptureSession *captureSession;
-    AVCaptureVideoPreviewLayer *videoPreviewLayer;
-    UIView *qrCodeFrameView;
+    __weak IBOutlet UIView *_topView;
+    __weak IBOutlet UIView *_topStatusView;
+    AVCaptureSession *_captureSession;
+    AVCaptureVideoPreviewLayer *_videoPreviewLayer;
+    UIView *_qrCodeFrameView;
 }
 
 @end
@@ -31,40 +33,44 @@
     
     AVCaptureDeviceInput* input = [[AVCaptureDeviceInput alloc]initWithDevice:captureDevice error:nil];
     
-    captureSession = [[AVCaptureSession alloc]init];
+    _captureSession = [[AVCaptureSession alloc]init];
     
-    [captureSession addInput:input];
+    [_captureSession addInput:input];
     
     AVCaptureMetadataOutput *captureMetadataOutput = [[AVCaptureMetadataOutput alloc]init];
     
-    [captureSession addOutput:captureMetadataOutput];
+    [_captureSession addOutput:captureMetadataOutput];
     
     [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     captureMetadataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     
-    videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:captureSession];
-    videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    videoPreviewLayer.frame = self.view.layer.bounds;
-    [self.view.layer addSublayer:videoPreviewLayer];
+    _videoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
+    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    _videoPreviewLayer.frame = self.view.layer.bounds;
+    [self.view.layer addSublayer:_videoPreviewLayer];
     
-    [captureSession startRunning];
+    [_captureSession startRunning];
     
     
-//    
+    [self.view bringSubviewToFront:_topView];
+    [self.view bringSubviewToFront:_topStatusView];
 
-//    // Start video capture.
-//    captureSession?.startRunning()
-//    
-//    view.bringSubview(toFront: messageLabel);
-//    view.bringSubview(toFront: topbar);
-//    
-//    qrCodeFrameView = UIView();
-//    if let qrCodeFrameView = qrCodeFrameView {
-//        qrCodeFrameView.layer.borderColor = UIColor.green.cgColor;
-//        qrCodeFrameView.layer.borderWidth = 2;
-//        view.addSubview(qrCodeFrameView);
-//        view.bringSubview(toFront: qrCodeFrameView);
-//    }
+    _qrCodeFrameView = [[UIView alloc]init];
+    _qrCodeFrameView.layer.borderColor = [UIColor greenColor].CGColor;
+    _qrCodeFrameView.layer.borderWidth = 2;
+    [self.view addSubview:_qrCodeFrameView];
+    [self.view bringSubviewToFront:_qrCodeFrameView];
+    
+    
+    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//    self.preferredStatusBarStyle = UIStatusBarStyleLightContent;
+//    [self setNeedsStatusBarAppearanceUpdate];
+
+    //相对于上面的接口，这个接口可以动画的改变statusBar的前景色
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    
+//    [self pre]
     
     
     // Do any additional setup after loading the view.
@@ -86,6 +92,14 @@
 //    [self.navigationController.p]
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma -mark 定制statusBar部分
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+
 /*
 #pragma mark - Navigation
 
