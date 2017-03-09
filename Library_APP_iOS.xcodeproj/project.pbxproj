@@ -32,6 +32,9 @@
 		3D807B651E6818A00013E4B3 /* UIView+CSYBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D807B641E6818A00013E4B3 /* UIView+CSYBase.m */; };
 		3D80CBE61E70E8C2008F7497 /* CSYSearchBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D80CBE51E70E8C1008F7497 /* CSYSearchBookViewController.m */; };
 		3D80CBE81E70E8CE008F7497 /* CSYSearchBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D80CBE71E70E8CE008F7497 /* CSYSearchBookViewController.xib */; };
+		3D80CBF21E711D37008F7497 /* CSYBookInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D80CBF01E711D37008F7497 /* CSYBookInfoCell.m */; };
+		3D80CBF31E711D37008F7497 /* CSYBookInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D80CBF11E711D37008F7497 /* CSYBookInfoCell.xib */; };
+		3D80CBF71E71349A008F7497 /* BookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D80CBF61E71349A008F7497 /* BookInfo.m */; };
 		3D9061E41E6F984800FDC85C /* CSYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061E31E6F984800FDC85C /* CSYMapViewController.m */; };
 		3D9061E71E6FA23F00FDC85C /* CSYPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9061E61E6FA23F00FDC85C /* CSYPersonViewController.m */; };
 		3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD41C61E6AA5FA00F7D7A4 /* CSYHTTPClient.m */; };
@@ -207,6 +210,11 @@
 		3D80CBE41E70E8C1008F7497 /* CSYSearchBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYSearchBookViewController.h; sourceTree = "<group>"; };
 		3D80CBE51E70E8C1008F7497 /* CSYSearchBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYSearchBookViewController.m; sourceTree = "<group>"; };
 		3D80CBE71E70E8CE008F7497 /* CSYSearchBookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSYSearchBookViewController.xib; sourceTree = "<group>"; };
+		3D80CBEF1E711D37008F7497 /* CSYBookInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYBookInfoCell.h; sourceTree = "<group>"; };
+		3D80CBF01E711D37008F7497 /* CSYBookInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYBookInfoCell.m; sourceTree = "<group>"; };
+		3D80CBF11E711D37008F7497 /* CSYBookInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSYBookInfoCell.xib; sourceTree = "<group>"; };
+		3D80CBF51E71349A008F7497 /* BookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfo.h; sourceTree = "<group>"; };
+		3D80CBF61E71349A008F7497 /* BookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfo.m; sourceTree = "<group>"; };
 		3D9061E21E6F984800FDC85C /* CSYMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYMapViewController.h; sourceTree = "<group>"; };
 		3D9061E31E6F984800FDC85C /* CSYMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYMapViewController.m; sourceTree = "<group>"; };
 		3D9061E51E6FA23F00FDC85C /* CSYPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYPersonViewController.h; sourceTree = "<group>"; };
@@ -314,6 +322,7 @@
 		3D5D4C531E67C67B00977194 /* Library_APP_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3D80CBF41E713488008F7497 /* Model */,
 				3DBD41C41E6AA5D700F7D7A4 /* Manager */,
 				3D807B4E1E68109B0013E4B3 /* ViewController */,
 				3D807B5A1E6818020013E4B3 /* View */,
@@ -537,6 +546,7 @@
 		3D807B4E1E68109B0013E4B3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3D80CBE91E711CF4008F7497 /* CSYBookInfoCell */,
 				3D80CBE31E70E8C1008F7497 /* CSYSearchBookViewController */,
 				3D4CA3D31E6FED100074CF8C /* CSYScanQRViewController */,
 				3D807B4F1E68109B0013E4B3 /* CSYLRViewController.h */,
@@ -591,6 +601,25 @@
 				3D80CBE71E70E8CE008F7497 /* CSYSearchBookViewController.xib */,
 			);
 			path = CSYSearchBookViewController;
+			sourceTree = "<group>";
+		};
+		3D80CBE91E711CF4008F7497 /* CSYBookInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				3D80CBEF1E711D37008F7497 /* CSYBookInfoCell.h */,
+				3D80CBF01E711D37008F7497 /* CSYBookInfoCell.m */,
+				3D80CBF11E711D37008F7497 /* CSYBookInfoCell.xib */,
+			);
+			path = CSYBookInfoCell;
+			sourceTree = "<group>";
+		};
+		3D80CBF41E713488008F7497 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D80CBF51E71349A008F7497 /* BookInfo.h */,
+				3D80CBF61E71349A008F7497 /* BookInfo.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		3DBD41C41E6AA5D700F7D7A4 /* Manager */ = {
@@ -722,6 +751,7 @@
 			files = (
 				3D5D4D001E67C70C00977194 /* FMBundle.bundle in Resources */,
 				3D5D4C671E67C67B00977194 /* LaunchScreen.storyboard in Resources */,
+				3D80CBF31E711D37008F7497 /* CSYBookInfoCell.xib in Resources */,
 				3D5D4C641E67C67B00977194 /* Assets.xcassets in Resources */,
 				3D5D4C621E67C67B00977194 /* Main.storyboard in Resources */,
 				3D4CA3D81E6FED290074CF8C /* CSYScanQRViewController.xib in Resources */,
@@ -889,6 +919,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D80CBF21E711D37008F7497 /* CSYBookInfoCell.m in Sources */,
 				3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */,
 				3D807B601E6818020013E4B3 /* CSYLoginView.m in Sources */,
 				3D807B651E6818A00013E4B3 /* UIView+CSYBase.m in Sources */,
@@ -901,6 +932,7 @@
 				3DCBB0251E6BED3600BC2392 /* CSYCommonViewController.m in Sources */,
 				3D807B551E68109B0013E4B3 /* CSYLRViewController.m in Sources */,
 				3D5D4C561E67C67B00977194 /* main.m in Sources */,
+				3D80CBF71E71349A008F7497 /* BookInfo.m in Sources */,
 				3D80CBE61E70E8C2008F7497 /* CSYSearchBookViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

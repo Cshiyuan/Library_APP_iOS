@@ -67,17 +67,6 @@
     
     
     self.navigationController.navigationBarHidden = YES;
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-//    self.preferredStatusBarStyle = UIStatusBarStyleLightContent;
-//    [self setNeedsStatusBarAppearanceUpdate];
-
-    //相对于上面的接口，这个接口可以动画的改变statusBar的前景色
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    
-//    [self pre]
-    
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,8 +82,7 @@
         _qrCodeFrameView.frame = CGRectZero;
         return;
     }
-    
-    //Get the metadata object
+
     AVMetadataMachineReadableCodeObject *metadataObj = metadataObjects[0];
     if (metadataObj.type == AVMetadataObjectTypeQRCode) {
         AVMetadataObject *barCodeObject = [_videoPreviewLayer transformedMetadataObjectForMetadataObject:metadataObj];
@@ -103,9 +91,7 @@
         
         if(metadataObj.stringValue != nil)
         {
-//            NSLog(@"%@",metadataObj.stringValue);
             _showInfoLabel.text = [NSString stringWithFormat:@"%@%@",@"扫码信息:",metadataObj.stringValue];
-//            @"扫码信息:" + metadataObj.stringValue;
         }
         
     }
@@ -124,14 +110,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

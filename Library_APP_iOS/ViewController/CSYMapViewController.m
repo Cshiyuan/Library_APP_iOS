@@ -62,7 +62,7 @@
 -(void)p_setButton
 {
     UIButton *scanQRButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    scanQRButton.backgroundColor = [UIColor blueColor];
+    scanQRButton.backgroundColor = [UIColor cyanColor];
     scanQRButton.alpha = 0.6;
     scanQRButton.layer.cornerRadius = 10.0;
     scanQRButton.titleLabel.font = [UIFont systemFontOfSize:11];
@@ -71,8 +71,8 @@
     [scanQRButton setImage:[UIImage imageNamed:@"focus"] forState:UIControlStateNormal];
     [scanQRButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
     
-    [scanQRButton setTitle:@"扫码" forState:UIControlStateNormal];
-    [scanQRButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    [scanQRButton setTitle:@"扫码" forState:UIControlStateNormal];
+//    [scanQRButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.view addSubview:scanQRButton];
     
     [scanQRButton addTarget:self action:@selector(scanButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -116,7 +116,7 @@
 
 -(void)scanButtonTouchUpInside:(UIButton *)btn
 {
-    [btn setBackgroundColor:[UIColor clearColor]];
+    [btn setBackgroundColor:[UIColor blueColor]];
     CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
     [self presentViewController:vc];
 }
