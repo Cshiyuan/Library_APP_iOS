@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CSYSearchBookViewController">
             <connections>
+                <outlet property="_bookTableView" destination="haR-Es-wuv" id="F4l-Tf-tm0"/>
                 <outlet property="_crossButton" destination="JqL-KY-a5u" id="bD9-Mu-HoG"/>
                 <outlet property="_searchBar" destination="HA1-fX-Ifg" id="gx1-4u-CRe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="4RX-vX-3ku"/>
@@ -64,10 +65,16 @@
                     <color key="barTintColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="haR-Es-wuv">
+                    <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="haR-Es-wuv" firstAttribute="top" secondItem="HA1-fX-Ifg" secondAttribute="bottom" id="0BK-fp-JFs"/>
                 <constraint firstAttribute="trailing" secondItem="IUs-WZ-Xci" secondAttribute="trailing" id="6VO-NZ-mm8"/>
+                <constraint firstItem="haR-Es-wuv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Eg0-AR-SLb"/>
                 <constraint firstItem="IUs-WZ-Xci" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="K5e-k5-PzX"/>
                 <constraint firstItem="HA1-fX-Ifg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="SZN-PK-cBg"/>
                 <constraint firstAttribute="trailing" secondItem="HA1-fX-Ifg" secondAttribute="trailing" id="WD4-Ce-PZH"/>
@@ -75,6 +82,8 @@
                 <constraint firstItem="IUs-WZ-Xci" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="axG-ow-qpS"/>
                 <constraint firstItem="RnG-QF-RXE" firstAttribute="top" secondItem="IUs-WZ-Xci" secondAttribute="bottom" id="kh2-QX-yXG"/>
                 <constraint firstItem="RnG-QF-RXE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="laf-Xe-ndj"/>
+                <constraint firstAttribute="trailing" secondItem="haR-Es-wuv" secondAttribute="trailing" id="mb0-V5-K9R"/>
+                <constraint firstAttribute="bottom" secondItem="haR-Es-wuv" secondAttribute="bottom" id="mj4-GJ-CAq"/>
                 <constraint firstAttribute="trailing" secondItem="RnG-QF-RXE" secondAttribute="trailing" id="qxD-G5-GQM"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="77.5"/>

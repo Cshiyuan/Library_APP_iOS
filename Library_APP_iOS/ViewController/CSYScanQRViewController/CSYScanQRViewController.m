@@ -13,6 +13,9 @@
     __weak IBOutlet UIButton *_crossButton;
     __weak IBOutlet UIView *_topView;
     __weak IBOutlet UIView *_topStatusView;
+    __weak IBOutlet UILabel *_showInfoLabel;
+    __weak IBOutlet UIView *_bottomView;
+    
     AVCaptureSession *_captureSession;
     AVCaptureVideoPreviewLayer *_videoPreviewLayer;
     UIView *_qrCodeFrameView;
@@ -54,6 +57,7 @@
     
     [self.view bringSubviewToFront:_topView];
     [self.view bringSubviewToFront:_topStatusView];
+    [self.view bringSubviewToFront:_bottomView];
 
     _qrCodeFrameView = [[UIView alloc]init];
     _qrCodeFrameView.layer.borderColor = [UIColor greenColor].CGColor;
@@ -99,7 +103,9 @@
         
         if(metadataObj.stringValue != nil)
         {
-            NSLog(@"%@",metadataObj.stringValue);
+//            NSLog(@"%@",metadataObj.stringValue);
+            _showInfoLabel.text = [NSString stringWithFormat:@"%@%@",@"扫码信息:",metadataObj.stringValue];
+//            @"扫码信息:" + metadataObj.stringValue;
         }
         
     }

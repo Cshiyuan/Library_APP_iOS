@@ -8,10 +8,11 @@
 
 #import "CSYSearchBookViewController.h"
 
-@interface CSYSearchBookViewController () <UISearchResultsUpdating, UISearchControllerDelegate,UISearchBarDelegate>
+@interface CSYSearchBookViewController () <UISearchBarDelegate>
 {
     __weak IBOutlet UIButton *_crossButton;
     __weak IBOutlet UISearchBar *_searchBar;
+    __weak IBOutlet UITableView *_bookTableView;
 }
 
 @end
@@ -32,16 +33,16 @@
         }
     }
     
+    //重新设置颜色
     [_searchBar setBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma -mark
+#pragma -mark UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSLog(@"1");
@@ -49,26 +50,25 @@
 
 -(void)crossButtonAction:(UIButton*)btn
 {
-    //    [self.navigationController.p]
     [_searchBar resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+// 触摸背景，关闭键盘
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    UIView *view = (UIView *)[touch view];
+    if (view == self.view)
+    {
+        [_searchBar resignFirstResponder];
+    }
+}
+
 
 #pragma -mark 定制statusBar部分
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
