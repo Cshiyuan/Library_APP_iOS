@@ -116,7 +116,7 @@
 
 -(void)scanButtonTouchUpInside:(UIButton *)btn
 {
-    [btn setBackgroundColor:[UIColor blueColor]];
+    [btn setBackgroundColor:[UIColor clearColor]];
     CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
     [self presentViewController:vc];
 }
@@ -126,8 +126,7 @@
     
     [self startLoadingWithIndicator];
     [btn setBackgroundColor:[UIColor grayColor]];
-//    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
-//    [self presentViewController:vc];
+
     
 }
 

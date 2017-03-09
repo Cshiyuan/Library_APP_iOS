@@ -27,7 +27,7 @@
 //    _searchBar = [[UISearchBar alloc]init];
     _searchBar.delegate = self;
     
-    self.navigationItem.titleView = _searchBar;
+//    self.navigationItem.titleView = _searchBar;
     // Do any additional setup after loading the view.
 }
 
