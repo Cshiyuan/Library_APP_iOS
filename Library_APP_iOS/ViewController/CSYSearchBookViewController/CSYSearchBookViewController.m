@@ -23,12 +23,17 @@
     
     [_crossButton addTarget:self action:@selector(crossButtonAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    
-//    _searchBar = [[UISearchBar alloc]init];
     _searchBar.delegate = self;
     
-//    self.navigationItem.titleView = _searchBar;
-    // Do any additional setup after loading the view.
+    //遍历出UISearchBar的背景，从父窗口remove掉
+    for (UIView *subview in [[_searchBar.subviews firstObject] subviews]) {
+        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+            [subview removeFromSuperview];
+        }
+    }
+    
+    [_searchBar setBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,9 +41,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma -mark
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSLog(@"1");
+}
+
 -(void)crossButtonAction:(UIButton*)btn
 {
     //    [self.navigationController.p]
+    [_searchBar resignFirstResponder];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -47,6 +59,8 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
+
 /*
 #pragma mark - Navigation
 
