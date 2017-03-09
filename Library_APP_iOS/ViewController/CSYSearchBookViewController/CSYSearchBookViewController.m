@@ -16,6 +16,12 @@
 
 
 #define cellIdentify @"BookInfoIdentifier"
+//#define searchResultCellIdentifiers = @"SearchResultCell"
+#define nothingFoundCellIdentifiers @"NothingFoundCell"
+
+
+
+
 
 @interface CSYSearchBookViewController () <UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -32,6 +38,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UINib *nib = [UINib nibWithNibName:@"NothingFoundCell" bundle:nil];
+    [_bookTableView registerNib:nib forCellReuseIdentifier:nothingFoundCellIdentifiers];
+    
     
     _bookArray = [[NSMutableArray alloc]init];
     
@@ -53,6 +63,11 @@
 #pragma -mark UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(_bookArray.count == 0)
+    {
+        return [_bookTableView dequeueReusableCellWithIdentifier:nothingFoundCellIdentifiers forIndexPath:indexPath];
+    }
+    
     CSYBookInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
     if(!cell)
     {
@@ -68,6 +83,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(_bookArray.count == 0)
+        return 1;
     return _bookArray.count;
 }
 
@@ -91,9 +108,11 @@
 {
     NSLog(@"1");
 }
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"search : %@",searchBar.text);
+    [_bookArray removeAllObjects];
     [_searchBar resignFirstResponder];
     [self startLoadingWithIndicator];
     [[CSYHTTPClient defaultClient]getPath:Search_URL parameters:@{@"BookName":searchBar.text} success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -119,7 +138,8 @@
         }
         
         [self stopLoadingWithIndicator];
-  
+        [_bookTableView reloadData];
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
           [self stopLoadingWithIndicator];
         
