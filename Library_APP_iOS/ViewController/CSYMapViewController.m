@@ -29,7 +29,6 @@
     [super viewDidLoad];
     
     
-    
     // 通过地图ID初始化地图视图
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
     [self.view addSubview:_mapView];

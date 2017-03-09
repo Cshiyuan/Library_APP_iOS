@@ -90,7 +90,7 @@
     
     [_loginView setLoginAction:^(NSString *email, NSString *password) {
         
-         [self showLoadingHUDWithText:nil];
+//         [self showLoadingHUDWithText:nil];
         
             [[CSYHTTPClient defaultClient]getPath:LOGIN_URL parameters:@{@"email": email,@"password":password} success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -103,7 +103,7 @@
                 
                 if ([code isEqualToNumber:@200])
                 {
-                    [self dismissHUD];
+//                    [self dismissHUD];
 
                     [self dismissViewControllerAnimated:YES completion:nil];
                     
@@ -114,7 +114,7 @@
                 }
                 else
                 {
-                    [self dismissHUD];
+//                    [self dismissHUD];
                 }
         
                 NSLog(@"%@",code);

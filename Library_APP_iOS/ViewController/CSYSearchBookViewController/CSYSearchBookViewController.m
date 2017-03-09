@@ -65,7 +65,10 @@
 {
     if(_bookArray.count == 0)
     {
-        return [_bookTableView dequeueReusableCellWithIdentifier:nothingFoundCellIdentifiers forIndexPath:indexPath];
+        UITableViewCell *nothingFoundCell =  [_bookTableView dequeueReusableCellWithIdentifier:nothingFoundCellIdentifiers forIndexPath:indexPath];
+        nothingFoundCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return nothingFoundCell;
     }
     
     CSYBookInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
@@ -87,6 +90,15 @@
         return 1;
     return _bookArray.count;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_bookArray.count == 0) {
+        return _bookTableView.frame.size.height;
+    }
+    
+    return 100;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
