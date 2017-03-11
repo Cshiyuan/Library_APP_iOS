@@ -14,13 +14,12 @@
 #import "CSYSearchBookViewController.h"
 #import "UISearchBar+CSYBase.h"
 
-@interface CSYMapViewController () <FMKMapViewDelegate, FMKNaviAnalyserDelegate, FMKSearchAnalyserDelegate>
+@interface CSYMapViewController () <FMKMapViewDelegate, FMKNaviAnalyserDelegate, FMKSearchAnalyserDelegate, UISearchBarDelegate>
 {
     
     /// 地图路径分析对象
     FMKNaviAnalyser *_naviAnalyser;
     /// 点击地图次数，用来判断添加起点还是终点
-    NSInteger _tapNum;
     
     FMKImageLayer *_imageLayer;
     FMKImageMarker *_startMarker;
@@ -31,6 +30,10 @@
     
     // Fengmap的搜索分析类
     FMKSearchAnalyser *_searchAnalyser;
+    
+    Boolean _isSetEnd;
+    
+    UIColor *_defaultColor;
     
     __weak IBOutlet UIView* _topStatusView;
     __weak IBOutlet UISearchBar *_searchBar;
@@ -45,6 +48,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _isSetEnd = NO;
+    
+    _searchBar.delegate = self;
+    
+    FMKModelLayer* modelLayer = [_mapView.map getModelLayerByGroupID:@"1"];
+    FMKModel* model = [modelLayer queryModelByFID:@"2048"];
+    _defaultColor = model.color;
     
     // 通过地图ID初始化地图视图
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
@@ -62,7 +73,6 @@
     // 通过地图数据路径初始化路径分析
     _naviAnalyser = [[FMKNaviAnalyser alloc] initWithMapID:@"00205100000590132"];
     _naviAnalyser.delegate = self;
-    _tapNum = 0;
     _imageLayer = [[FMKImageLayer alloc] initWithGroupID:@"1"];
     [_mapView.map addLayer:_imageLayer];
     
@@ -145,6 +155,7 @@
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:stringValue];
     };
+    _isSetEnd = NO;
     [self presentViewController:vc];
 }
 
@@ -163,8 +174,27 @@
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:info.slfName];
     };
+    _isSetEnd = YES;
     [self presentViewController:vc];
 }
+
+#pragma -mark UISearchResultsUpdating
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"search : %@",searchBar.text);
+    CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
+    vc.keyWorkForSearch = searchBar.text;
+    __weak typeof(self) weakSelf = self;
+    vc.bookInfoBlock = ^(BookInfo* info)
+    {
+        //设置搜索条件，搜索多个用"|"号分开
+        [weakSelf searchModelByKeyWords:info.slfName];
+    };
+    _isSetEnd = YES;
+    [self presentViewController:vc];
+
+}
+
 
 #pragma -mark 定制statusBar部分
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -202,12 +232,6 @@
                 //在直线中添加segment
                 [line addSegment:segment];
             }
-            //            // 设置线标注的属性
-            //            line.color = [UIColor redColor];
-            //            line.width = 3;
-            //            line.mode = FMKLINE_PLANE;
-            //            // 设置线标注类型
-            //            line.type = FMKLINE_TEXTURE;
             [_mapView.map.lineLayer addMarker:line];
         }
             break;
@@ -225,6 +249,7 @@
 {
     int min = ceil(length/80);
 //    _distanceLab.text = [NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min];
+    NSLog(@"%@",[NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min]);
 }
 
 #pragma -mark 根据fid搜索公共设施
@@ -247,9 +272,12 @@
     FMKMapPoint point = fmModel.centerCoord;
     FMKGeoCoord coord = FMKGeoCoordMake(1, point);
     
+    FMKModelLayer* modelLayer = [_mapView.map getModelLayerByGroupID:@"1"];
+    
     if (coord.mapPoint.x == 0 && coord.mapPoint.y == 0) return;
     
-    if (_tapNum % 2 == 0) {
+    if (!_isSetEnd) {
+ 
         // 删除原来的marker和路径
         [_imageLayer removeMarker:_startMarker];
         _startMarker = nil;
@@ -258,26 +286,43 @@
         // 删除所有线标注
         [_mapView.map.lineLayer removeAll];
         
+        NSArray *arraySearchResultModel = [_searchAnalyser getAllModelsWithGroupID:@"1"];
+        for (FMKModelSearchResult* result in arraySearchResultModel)
+        {
+            [modelLayer queryModelByFID:result.FID].color = _defaultColor;
+        }
+        
         // 添加起点
         _startMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"start"] Coord:coord.mapPoint];
         _startMarker.imageSize = CGSizeMake(30, 30);
-        _startMarker.offsetMode = FMKImageMarker_MODELTOP;
+        _startMarker.offsetMode = FMKImageMarker_USERDEFINE;
+        _startMarker.imageOffset = 2;
         [_imageLayer addMarker:_startMarker];
         _startCoord = coord;
+        
+        //设置颜色
+        FMKModel* model = [modelLayer queryModelByFID:fmModel.FID];
+        model.color = [UIColor redColor];
+        model.selected = YES;
     }
     else {
         // 添加终点
         _endMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"end"] Coord:coord.mapPoint];
         _endMarker.imageSize = CGSizeMake(30, 30);
-        _endMarker.offsetMode = FMKImageMarker_MODELTOP;
+        _endMarker.offsetMode = FMKImageMarker_USERDEFINE;
+        _endMarker.imageOffset = 2;
         [_imageLayer addMarker:_endMarker];
         _endCoord = coord;
+        
+        //设置颜色
+        FMKModel* model = [modelLayer queryModelByFID:fmModel.FID];
+        model.color = [UIColor redColor];
+        model.selected = YES;
         
         // 添加线标注，规划路径
         [self naviRouteAnalyserWithStart:_startCoord end:_endCoord];
     }
     
-    ++_tapNum;
 }
 
 @end

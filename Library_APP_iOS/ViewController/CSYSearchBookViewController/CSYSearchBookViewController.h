@@ -16,5 +16,6 @@ typedef void(^clickBookInfoBlock)(BookInfo* bookInfo);
 @interface CSYSearchBookViewController : CSYCommonViewController
 
 @property(nonatomic, strong)clickBookInfoBlock bookInfoBlock;
+@property(nonatomic, copy)NSString *keyWorkForSearch;
 
 @end

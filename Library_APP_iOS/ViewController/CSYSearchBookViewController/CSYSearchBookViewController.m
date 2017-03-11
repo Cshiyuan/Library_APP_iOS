@@ -38,19 +38,19 @@
     
     UINib *nib = [UINib nibWithNibName:@"NothingFoundCell" bundle:nil];
     [_bookTableView registerNib:nib forCellReuseIdentifier:nothingFoundCellIdentifiers];
-    
-    
     _bookArray = [[NSMutableArray alloc]init];
-    
     [_crossButton addTarget:self action:@selector(crossButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-
     _searchBar.delegate = self;
-    
     //去掉边框并且设置颜色
     [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
-
     _bookTableView.delegate = self;
     _bookTableView.dataSource = self;
+    
+    //有传递值
+    if(_keyWorkForSearch)
+    {
+        [self loadingBookInfo:_keyWorkForSearch];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +87,7 @@
         return 1;
     return _bookArray.count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_bookArray.count == 0) {
@@ -105,6 +106,7 @@
     {
         _bookInfoBlock(_bookArray[indexPath.row]);
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)configCell:(CSYBookInfoCell*)cell With:(BookInfo*)bookInfo
@@ -117,21 +119,22 @@
 
 
 #pragma -mark UISearchResultsUpdating
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
-    NSLog(@"1");
-}
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"search : %@",searchBar.text);
     [_bookArray removeAllObjects];
     [_searchBar resignFirstResponder];
-    [self startLoadingWithIndicator];
-    [[CSYHTTPClient defaultClient]getPath:Search_URL parameters:@{@"BookName":searchBar.text} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self loadingBookInfo:searchBar.text];
+    
+}
+#pragma -mark 根据关键字从远程加载数据
+-(void)loadingBookInfo:(NSString*)keyWord
+{
+     [self startLoadingWithIndicator];
+    [[CSYHTTPClient defaultClient]getPath:Search_URL parameters:@{@"BookName":keyWord} success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if (![responseObject isKindOfClass:[NSDictionary class]]) {
-
+            
         }
         NSDictionary *responseDic = responseObject;
         NSNumber *code = responseDic[@"data"][@"code"];
@@ -152,10 +155,10 @@
         [_bookTableView reloadData];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-          [self stopLoadingWithIndicator];
+        [self stopLoadingWithIndicator];
         
     }];
-    
+
 }
 
 

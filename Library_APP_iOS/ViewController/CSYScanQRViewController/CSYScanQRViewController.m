@@ -20,6 +20,7 @@
     AVCaptureSession *_captureSession;
     AVCaptureVideoPreviewLayer *_videoPreviewLayer;
     UIView *_qrCodeFrameView;
+    NSString *_keyScanString;
 }
 
 @end
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _keyScanString = @"x";
     [_crossButton addTarget:self action:@selector(crossButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -103,10 +105,14 @@
                                                                             range:NSMakeRange(0, metadataObj.stringValue.length)];
             
             _showInfoLabel.text = [NSString stringWithFormat:@"%@%@",@"扫码信息:",metadataObj.stringValue];
-            if(_scanInfoFromQRBlock && numberofMatch > 0)
+            if(_keyScanString != metadataObj.stringValue)
             {
-                _scanInfoFromQRBlock(metadataObj.stringValue);
-                [self dismissViewControllerAnimated:YES completion:nil];
+                _keyScanString = metadataObj.stringValue;
+                if(_scanInfoFromQRBlock && numberofMatch > 0)
+                {
+                    _scanInfoFromQRBlock(metadataObj.stringValue);
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             }
         }
         
