@@ -106,6 +106,7 @@
             if(_scanInfoFromQRBlock && numberofMatch > 0)
             {
                 _scanInfoFromQRBlock(metadataObj.stringValue);
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
         
