@@ -14,8 +14,16 @@
 #import "CSYSearchBookViewController.h"
 #import "UISearchBar+CSYBase.h"
 
+const static float ShowInfoViewHeight = 40;  //信息显示view的大小
+
 @interface CSYMapViewController () <FMKMapViewDelegate, FMKNaviAnalyserDelegate, FMKSearchAnalyserDelegate, UISearchBarDelegate>
 {
+    
+    __weak IBOutlet UIView *_topStatusView;
+    __weak IBOutlet UISearchBar *_searchBar;
+    
+    __weak IBOutlet UIView *_showInfoView;
+    __weak IBOutlet UILabel *_showInfoLabel;
     
     /// 地图路径分析对象
     FMKNaviAnalyser *_naviAnalyser;
@@ -34,9 +42,6 @@
     Boolean _isSetEnd;
     
     UIColor *_defaultColor;
-    
-    __weak IBOutlet UIView* _topStatusView;
-    __weak IBOutlet UISearchBar *_searchBar;
 }
 @property (nonatomic,strong) FMKMapView *mapView;
 
@@ -48,6 +53,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self hideInfoViewWithAnimation];
     
     _isSetEnd = NO;
     
@@ -67,6 +74,8 @@
     
     [self.view bringSubviewToFront:_topStatusView];
     [self.view bringSubviewToFront:_searchBar];
+    [self.view bringSubviewToFront:_showInfoView];
+    
     //重新设置颜色
     [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
     
@@ -139,6 +148,47 @@
     
 }
 
+-(void)showInfoViewWithAnimationByMessage:(NSString*)message
+{
+    if(_showInfoView.frame.size.height == 0)
+    {
+        [UIView animateWithDuration:0.3 animations:^{
+            //变宽
+            CGRect showInfoViewFrame = _showInfoView.frame;
+            showInfoViewFrame.size.height = ShowInfoViewHeight;
+            _showInfoView.frame = showInfoViewFrame;
+
+            //下移
+            CGRect searchBarFrame = _searchBar.frame;
+            searchBarFrame.origin.y += ShowInfoViewHeight;
+            _searchBar.frame = searchBarFrame;
+        } completion:^(BOOL finished) {
+            _showInfoLabel.text = message;
+        }];
+    }
+}
+
+-(void)hideInfoViewWithAnimation
+{
+    
+    if(_showInfoView.frame.size.height != 0)
+    {
+        _showInfoLabel.text = @"";
+        [UIView animateWithDuration:0.3 animations:^{
+            //变窄
+            CGRect showInfoViewFrame = _showInfoView.frame;
+            showInfoViewFrame.size.height = 0;
+            _showInfoView.frame = showInfoViewFrame;
+        
+            //上移
+            CGRect searchBarFrame = _searchBar.frame;
+            searchBarFrame.origin.y -= ShowInfoViewHeight;
+            _searchBar.frame = searchBarFrame;
+        }];
+    }
+    
+}
+
 #pragma -mark 按钮响应事件
 -(void)scanButtonTouchDown:(UIButton *)btn
 {
@@ -148,6 +198,7 @@
 -(void)scanButtonTouchUpInside:(UIButton *)btn
 {
     [btn setBackgroundColor:[UIColor cyanColor]];
+    [self hideInfoViewWithAnimation];
     CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
     __weak typeof(self) weakSelf = self;
     vc.scanInfoFromQRBlock = ^(NSString* stringValue)
@@ -167,10 +218,18 @@
 -(void)searchBKButtonTouchUpInside:(UIButton *)btn
 {
     [btn setBackgroundColor:[UIColor redColor]];
+    [self hideInfoViewWithAnimation];
     CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
     __weak typeof(self) weakSelf = self;
     vc.bookInfoBlock = ^(BookInfo* info)
     {
+        
+        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_after(timer, dispatch_get_main_queue(), ^{
+            NSString* msg = [NSString stringWithFormat:@"%@所在书架：%@",info.bookName,info.slfName];
+            [self showInfoViewWithAnimationByMessage:msg];
+        });
+        
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:info.slfName];
     };
@@ -187,6 +246,12 @@
     __weak typeof(self) weakSelf = self;
     vc.bookInfoBlock = ^(BookInfo* info)
     {
+        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_after(timer, dispatch_get_main_queue(), ^{
+            NSString* msg = [NSString stringWithFormat:@"%@所在书架：%@",info.bookName,info.slfName];
+            [self showInfoViewWithAnimationByMessage:msg];
+        });
+
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:info.slfName];
     };
@@ -248,7 +313,6 @@
 - (void)getFloorRouteLength:(double)length
 {
     int min = ceil(length/80);
-//    _distanceLab.text = [NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min];
     NSLog(@"%@",[NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min]);
 }
 
