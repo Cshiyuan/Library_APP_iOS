@@ -13,8 +13,9 @@
 
 @interface CSYLRViewController ()
 {
-    CSYLoginView* _loginView;
+    CSYLoginView *_loginView;
     double _moveHeight;
+    UIImage *_backgroundImage;
 }
 
 
@@ -41,8 +42,6 @@
     [self p_setLoginView];
     
     
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,16 +50,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setBackgroundImage:(UIImage *)image
+{
+    _backgroundImage = image;
+}
+
 #pragma -mark 设置背景
 -(void)p_setBackGroundImageAndEffect
 {
-    UIImageView* backgroundImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cafedeadend"]];
+    UIImage *background;
+    if(_backgroundImage) {
+        background = _backgroundImage;
+    } else {
+        background = [UIImage imageNamed:@"cafedeadend"];
+    }
+    
+    UIImageView* backgroundImageView = [[UIImageView alloc]initWithImage:background];
     backgroundImageView.frame = self.view.frame;
     
     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
     visualEffectView.frame = backgroundImageView.frame;
-    visualEffectView.alpha = 0.8;
+    visualEffectView.alpha = 1;
     
     [backgroundImageView addSubview:visualEffectView];
     [self.view addSubview:backgroundImageView];
@@ -72,8 +83,7 @@
 
     _loginView = [CSYLoginView getView];
     _loginView.layer.cornerRadius = 10;
-    _loginView.alpha = 0.9;
-//    _loginView.frame = CGRectMake(100, 300, 200, 200);
+    _loginView.alpha = 0.8;
 
     [self.view addSubview:_loginView];
     
@@ -84,39 +94,26 @@
         make.width.equalTo(_loginView.superview.mas_width).multipliedBy(0.8);
         make.height.equalTo(_loginView.mas_width);
     }];
-    //一定要先加入到父类才有效  设置渐变
-//    [loginView setGradientColorWith:[UIColor blueColor] toColor:[UIColor whiteColor] WithAlpha:0.6];
-   
+
+    __weak typeof(self) weakSelf = self;
     
     [_loginView setLoginAction:^(NSString *email, NSString *password) {
-        
-//         [self showLoadingHUDWithText:nil];
-        
             [[CSYHTTPClient defaultClient]getPath:LOGIN_URL parameters:@{@"email": email,@"password":password} success:^(NSURLSessionDataTask *task, id responseObject) {
-        
                 if (![responseObject isKindOfClass:[NSDictionary class]]) {
-        //            handler(-100, @"格式有误");
-        //            return nil;
+
                 }
                 NSDictionary *responseDic = responseObject;
                 NSNumber *code = responseDic[@"data"][@"code"];
-                
                 if ([code isEqualToNumber:@200])
                 {
-//                    [self dismissHUD];
-
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    
-                    
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setBool:YES forKey:@"isLogin"];
-                    
                 }
                 else
                 {
 //                    [self dismissHUD];
                 }
-        
                 NSLog(@"%@",code);
         
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -183,16 +180,5 @@
         [_loginView.userName resignFirstResponder];
     }
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

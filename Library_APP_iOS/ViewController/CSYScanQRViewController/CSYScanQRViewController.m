@@ -7,6 +7,7 @@
 //
 
 #import "CSYScanQRViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CSYScanQRViewController () <AVCaptureMetadataOutputObjectsDelegate>
 {
@@ -91,7 +92,21 @@
         
         if(metadataObj.stringValue != nil)
         {
+            
+            //1.创建正则表达式，[0-9]:表示‘0’到‘9’的字符的集合
+            NSString *pattern = @"F[0-9][0-9][0-9][0-9]";
+            //1.1将正则表达式设置为OC规则
+            NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+            
+            NSUInteger numberofMatch = [regular numberOfMatchesInString:metadataObj.stringValue
+                                                                          options:NSMatchingReportProgress
+                                                                            range:NSMakeRange(0, metadataObj.stringValue.length)];
+            
             _showInfoLabel.text = [NSString stringWithFormat:@"%@%@",@"扫码信息:",metadataObj.stringValue];
+            if(_scanInfoFromQRBlock && numberofMatch > 0)
+            {
+                _scanInfoFromQRBlock(metadataObj.stringValue);
+            }
         }
         
     }

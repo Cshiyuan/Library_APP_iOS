@@ -27,4 +27,15 @@
     return info;
 }
 
+
++ (UIImage *)viewSnapshot:(UIView *)view withInRect:(CGRect)rect;
+{
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect(image.CGImage,rect)];
+    return image;
+}
+
 @end

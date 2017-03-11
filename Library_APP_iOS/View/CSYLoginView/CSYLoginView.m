@@ -47,7 +47,7 @@
         //注册键盘出现的通知
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardWillChangeFrameNotification object:nil];
+                                                     name:UIKeyboardDidChangeFrameNotification object:nil];
         //注册键盘消失的通知
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillHide:)
@@ -76,6 +76,7 @@
     
     _loginButton.userInteractionEnabled = NO;
     _loginButton.alpha = 0.5;
+    _loginButton.layer.cornerRadius = 10;
     
     _passWord.secureTextEntry = YES;
     
@@ -167,16 +168,13 @@
     
     CGFloat keyboardHeight = keyboardRect.origin.y;
     
-//    NSLog(@"%@",self.frame);
-//    NSLog(@"%@",CGRectGetMaxY(self.frame));
-    
     double bHeight = CGRectGetMaxY(self.frame) - keyboardHeight;
     
     if(bHeight > 0)
     {
         [UIView animateWithDuration:duration animations:^{
             
-            self.transform = CGAffineTransformMakeTranslation(0, -bHeight);
+            self.transform = CGAffineTransformMakeTranslation(0, -bHeight-10);
             
         }];
     }

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+
+
+
+typedef void(^ScanInfoFromQRBlock)(NSString* bookInfo);
 
 @interface CSYScanQRViewController : UIViewController
 
-//- (UIStatusBarStyle)preferredStatusBarStyle;
+@property(nonatomic, copy)ScanInfoFromQRBlock scanInfoFromQRBlock;
 
 @end

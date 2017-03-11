@@ -7,11 +7,10 @@
 //
 
 #import "CSYCommonViewController.h"
+#import "CSYToolSet.h"
 #import "MBProgressHUD.h"
 #import "CSYLRViewController.h"
-//#import "ZSBlockAlertView.h"
 #import "CSYNavigationController.h"
-#import "SVProgressHUD.h"
 
 #define LOG_DATA(d) NSLog(@"%@", [[NSString alloc] initWithData:(d) encoding:NSUTF8StringEncoding])
 #define INDICATOR_ALPHA 0.7f
@@ -75,9 +74,12 @@ static NSOperationQueue *sRequestQueue = nil;
 -(void)presentLoginViewController{
     
     [self.view endEditing:YES];
-//    [DMUserLoginSession destroyActiveSession];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:DMUserDidLogoutNotificationName object:nil];
+
+    
     CSYLRViewController *controller = [[CSYLRViewController alloc] init];
+    
+    UIImage *image = [CSYToolSet viewSnapshot:self.view withInRect:self.view.frame];
+    [controller setBackgroundImage:image];
     
     CSYNavigationController *nav = [[CSYNavigationController alloc] initWithRootViewController:controller];
     [nav setNavigationBarHidden:YES animated:NO];

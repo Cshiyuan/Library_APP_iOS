@@ -11,4 +11,7 @@
 
 @interface CSYLRViewController : CSYCommonViewController
 
+//@property
+-(void)setBackgroundImage:(UIImage *)image;
+
 @end

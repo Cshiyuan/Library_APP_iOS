@@ -20,9 +20,6 @@
 #define nothingFoundCellIdentifiers @"NothingFoundCell"
 
 
-
-
-
 @interface CSYSearchBookViewController () <UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     __weak IBOutlet UIButton *_crossButton;
@@ -104,6 +101,10 @@
 {
     NSLog(@"%ld",(long)indexPath.row);
     [_searchBar resignFirstResponder];
+    if(_bookInfoBlock)
+    {
+        _bookInfoBlock(_bookArray[indexPath.row]);
+    }
 }
 
 -(void)configCell:(CSYBookInfoCell*)cell With:(BookInfo*)bookInfo
@@ -137,8 +138,6 @@
         
         if ([code isEqualToNumber:@200])
         {
-            
-            
             NSArray *datas = responseDic[@"data"][@"info"];
             for(NSDictionary* book in datas)
             {

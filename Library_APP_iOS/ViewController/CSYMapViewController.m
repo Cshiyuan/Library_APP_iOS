@@ -28,13 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     // 通过地图ID初始化地图视图
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
     [self.view addSubview:_mapView];
-    
-    
-    
+
     UITapGestureRecognizer *tagGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesMap)];
     [_mapView addGestureRecognizer:tagGR];
     
@@ -44,8 +41,6 @@
     
     [self.view bringSubviewToFront:_topStatusView];
     [self.view bringSubviewToFront:_searchBar];
-    
-
     //重新设置颜色
     [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
     
@@ -54,14 +49,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL isLogin = [userDefaults boolForKey:@"isLogin"];
-    
     if(!isLogin){
         [self presentLoginViewController];
     }
-    
 }
 
 
@@ -120,20 +112,28 @@
 {
     [btn setBackgroundColor:[UIColor cyanColor]];
     CSYScanQRViewController *vc = [[CSYScanQRViewController alloc]init];
+    __weak typeof(self) weakSelf = self;
+    vc.scanInfoFromQRBlock = ^(NSString* stringValue)
+    {
+        
+    };
     [self presentViewController:vc];
 }
 
 -(void)searchBKButtonTouchDown:(UIButton *)btn
 {
-    
     [btn setBackgroundColor:[UIColor grayColor]];
-  
 }
 
 -(void)searchBKButtonTouchUpInside:(UIButton *)btn
 {
     [btn setBackgroundColor:[UIColor redColor]];
     CSYSearchBookViewController *vc = [[CSYSearchBookViewController alloc]init];
+    __weak typeof(self) weakSelf = self;
+    vc.bookInfoBlock = ^(BookInfo* info)
+    {
+        
+    };
     [self presentViewController:vc];
 }
 

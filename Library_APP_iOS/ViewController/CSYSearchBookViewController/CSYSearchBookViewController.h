@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CSYCommonViewController.h"
 
+@class BookInfo;
+
+typedef void(^clickBookInfoBlock)(BookInfo* bookInfo);
+
 @interface CSYSearchBookViewController : CSYCommonViewController
 
+@property(nonatomic, strong)clickBookInfoBlock bookInfoBlock;
 
 @end
