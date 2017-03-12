@@ -64,10 +64,6 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     _showInfoLabel.numberOfLines = 0;
     _showInfoLabel.textAlignment = NSTextAlignmentCenter;
     
-    FMKModelLayer* modelLayer = [_mapView.map getModelLayerByGroupID:@"1"];
-    FMKModel* model = [modelLayer queryModelByFID:@"2048"];
-    _defaultColor = model.color;
-    
     // 通过地图ID初始化地图视图
     self.mapView = [[FMKMapView alloc] initWithFrame:self.view.frame ID:@"00205100000590132" delegate:self autoUpgrade:NO];
     [self.view addSubview:_mapView];
@@ -93,6 +89,10 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     _searchAnalyser = [[FMKSearchAnalyser alloc] initWithMapID:@"00205100000590132"];
     //设置搜索代理
     _searchAnalyser.delegate = self;
+    
+    FMKModelLayer *modelLayer = [_mapView.map getModelLayerByGroupID:@"1"];
+    FMKModel *model = [modelLayer queryModelByFID:@"90132023"];
+    _defaultColor = model.color;
 
 }
 
@@ -379,11 +379,17 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     }
     else {
         // 添加终点
+        if(_endMarker)
+        {
+            [_imageLayer removeMarker:_endMarker];
+        }
+        
         _endMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"end"] Coord:coord.mapPoint];
         _endMarker.imageSize = CGSizeMake(30, 30);
         _endMarker.offsetMode = FMKImageMarker_USERDEFINE;
         _endMarker.imageOffset = 2;
         [_imageLayer addMarker:_endMarker];
+        
         _endCoord = coord;
         
         //设置颜色
