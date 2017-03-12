@@ -40,8 +40,6 @@
     //设置背景和效果
     [self p_setBackGroundImageAndEffect];
     [self p_setLoginView];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D3040E91E7457CA00AD35A5 /* CSYRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3040E81E7457CA00AD35A5 /* CSYRegisterView.m */; };
+		3D3040EB1E7457E700AD35A5 /* CSYRegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3040EA1E7457E700AD35A5 /* CSYRegisterView.xib */; };
 		3D4CA3D21E6FE0500074CF8C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4CA3D11E6FE0500074CF8C /* AVFoundation.framework */; };
 		3D4CA3D61E6FED100074CF8C /* CSYScanQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CA3D51E6FED100074CF8C /* CSYScanQRViewController.m */; };
 		3D4CA3D81E6FED290074CF8C /* CSYScanQRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D4CA3D71E6FED290074CF8C /* CSYScanQRViewController.xib */; };
@@ -70,6 +72,9 @@
 		21B42EED31FC8D8D91047A9F /* Pods-Library_APP_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Library_APP_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Library_APP_iOSTests/Pods-Library_APP_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		21F1C66BE6E04C8EAA5C0008 /* Pods-Library_APP_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Library_APP_iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Library_APP_iOSUITests/Pods-Library_APP_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		33AC0D53540C748813012829 /* Pods-Library_APP_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Library_APP_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Library_APP_iOS/Pods-Library_APP_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3D3040E71E7457CA00AD35A5 /* CSYRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYRegisterView.h; sourceTree = "<group>"; };
+		3D3040E81E7457CA00AD35A5 /* CSYRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYRegisterView.m; sourceTree = "<group>"; };
+		3D3040EA1E7457E700AD35A5 /* CSYRegisterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSYRegisterView.xib; sourceTree = "<group>"; };
 		3D4CA3D11E6FE0500074CF8C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3D4CA3D41E6FED100074CF8C /* CSYScanQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSYScanQRViewController.h; sourceTree = "<group>"; };
 		3D4CA3D51E6FED100074CF8C /* CSYScanQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSYScanQRViewController.m; sourceTree = "<group>"; };
@@ -291,6 +296,16 @@
 				21F1C66BE6E04C8EAA5C0008 /* Pods-Library_APP_iOSUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3D3040E61E7454FF00AD35A5 /* CSYRegisterView */ = {
+			isa = PBXGroup;
+			children = (
+				3D3040E71E7457CA00AD35A5 /* CSYRegisterView.h */,
+				3D3040E81E7457CA00AD35A5 /* CSYRegisterView.m */,
+				3D3040EA1E7457E700AD35A5 /* CSYRegisterView.xib */,
+			);
+			path = CSYRegisterView;
 			sourceTree = "<group>";
 		};
 		3D4CA3D31E6FED100074CF8C /* CSYScanQRViewController */ = {
@@ -576,6 +591,7 @@
 		3D807B5A1E6818020013E4B3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3D3040E61E7454FF00AD35A5 /* CSYRegisterView */,
 				3DB0E34B1E71521900808264 /* UISearchBar+CSYBase */,
 				3D807B621E6818720013E4B3 /* UIView+CSYBase */,
 				3D807B5C1E6818020013E4B3 /* CSYLoginView */,
@@ -779,6 +795,7 @@
 				3D4CA3D81E6FED290074CF8C /* CSYScanQRViewController.xib in Resources */,
 				3D807B611E6818020013E4B3 /* CSYLoginView.xib in Resources */,
 				3D80CBE81E70E8CE008F7497 /* CSYSearchBookViewController.xib in Resources */,
+				3D3040EB1E7457E700AD35A5 /* CSYRegisterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,6 +961,7 @@
 				3DB0E34A1E71433800808264 /* CSYToolSet.m in Sources */,
 				3D80CBF21E711D37008F7497 /* CSYBookInfoCell.m in Sources */,
 				3DBD41C71E6AA5FA00F7D7A4 /* CSYHTTPClient.m in Sources */,
+				3D3040E91E7457CA00AD35A5 /* CSYRegisterView.m in Sources */,
 				3DB0E34E1E71523E00808264 /* UISearchBar+CSYBase.m in Sources */,
 				3D807B601E6818020013E4B3 /* CSYLoginView.m in Sources */,
 				3D807B651E6818A00013E4B3 /* UIView+CSYBase.m in Sources */,

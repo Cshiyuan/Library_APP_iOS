@@ -13,7 +13,6 @@
 {
     UIButton *_registerButton;
     LoginAction _loginAction;
-    
 }
 
 @end
@@ -43,7 +42,6 @@
         [_registerButton setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:_registerButton];
         
-        
         //注册键盘出现的通知
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillShow:)
@@ -52,18 +50,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification object:nil];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_passWord];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_userName];
-        
         self.userInteractionEnabled = YES;
-        
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
-        
         [self addGestureRecognizer:singleTap];
-        
-        
     }
     return self;
 }
@@ -73,32 +64,22 @@
 {
     [super awakeFromNib];
     [_loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-    
     _loginButton.userInteractionEnabled = NO;
     _loginButton.alpha = 0.5;
     _loginButton.layer.cornerRadius = 10;
-    
     _passWord.secureTextEntry = YES;
-    
     _passWord.delegate = self;
     _userName.delegate = self;
-    
-    
-    
 }
 
 #pragma -mark UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-   
-    
     return YES;
 }
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
     if(textField == _passWord)
     {
         [self loginAction:_loginButton];
@@ -129,8 +110,6 @@
 }
 
 
-
-
 -(void)setLoginAction:(LoginAction)action
 {
     if(action)
@@ -139,11 +118,7 @@
     }
 }
 
-
-
 #pragma -mark NSNotification
-
-
 -(void)textFieldChanged:(UITextField*)textField
 {
     if(![_passWord.text isEqualToString:@""] && ![_userName.text isEqualToString:@""])
@@ -161,25 +136,16 @@
 
 ///键盘显示事件
 - (void) keyboardWillShow:(NSNotification *)notification {
-    
     CGFloat duration = [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-    
     CGRect keyboardRect = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    
     CGFloat keyboardHeight = keyboardRect.origin.y;
-    
     double bHeight = CGRectGetMaxY(self.frame) - keyboardHeight;
-    
     if(bHeight > 0)
     {
         [UIView animateWithDuration:duration animations:^{
-            
             self.transform = CGAffineTransformMakeTranslation(0, -bHeight-10);
-            
         }];
     }
-    
-
 }
 
 ///键盘消失事件

@@ -40,6 +40,7 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     FMKSearchAnalyser *_searchAnalyser;
     
     Boolean _isSetEnd;
+    NSString *_distanceMsg;
     
     UIColor *_defaultColor;
 }
@@ -57,8 +58,11 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     [self hideInfoViewWithAnimation];
     
     _isSetEnd = NO;
+    _distanceMsg = @"";
     
     _searchBar.delegate = self;
+    _showInfoLabel.numberOfLines = 0;
+    _showInfoLabel.textAlignment = NSTextAlignmentCenter;
     
     FMKModelLayer* modelLayer = [_mapView.map getModelLayerByGroupID:@"1"];
     FMKModel* model = [modelLayer queryModelByFID:@"2048"];
@@ -157,6 +161,8 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
             CGRect showInfoViewFrame = _showInfoView.frame;
             showInfoViewFrame.size.height = ShowInfoViewHeight;
             _showInfoView.frame = showInfoViewFrame;
+            
+            _showInfoLabel.frame = _showInfoView.bounds;
 
             //下移
             CGRect searchBarFrame = _searchBar.frame;
@@ -180,6 +186,7 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
             showInfoViewFrame.size.height = 0;
             _showInfoView.frame = showInfoViewFrame;
         
+            _showInfoLabel.frame = _showInfoView.bounds;
             //上移
             CGRect searchBarFrame = _searchBar.frame;
             searchBarFrame.origin.y -= ShowInfoViewHeight;
@@ -224,9 +231,9 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     vc.bookInfoBlock = ^(BookInfo* info)
     {
         
-        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
         dispatch_after(timer, dispatch_get_main_queue(), ^{
-            NSString* msg = [NSString stringWithFormat:@"%@所在书架：%@",info.bookName,info.slfName];
+            NSString* msg = [NSString stringWithFormat:@"%@ 所在书架：%@ \n%@",info.bookName,info.slfName,_distanceMsg];
             [self showInfoViewWithAnimationByMessage:msg];
         });
         
@@ -246,9 +253,9 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     __weak typeof(self) weakSelf = self;
     vc.bookInfoBlock = ^(BookInfo* info)
     {
-        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_time_t timer = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
         dispatch_after(timer, dispatch_get_main_queue(), ^{
-            NSString* msg = [NSString stringWithFormat:@"%@所在书架：%@",info.bookName,info.slfName];
+            NSString* msg = [NSString stringWithFormat:@"%@ 所在书架：%@ \n%@",info.bookName,info.slfName,_distanceMsg];
             [self showInfoViewWithAnimationByMessage:msg];
         });
 
@@ -313,7 +320,8 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
 - (void)getFloorRouteLength:(double)length
 {
     int min = ceil(length/80);
-    NSLog(@"%@",[NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min]);
+    _distanceMsg = [NSString stringWithFormat:@"路径总距离：%.2f米  需%d分钟", length, min];
+
 }
 
 #pragma -mark 根据fid搜索公共设施
