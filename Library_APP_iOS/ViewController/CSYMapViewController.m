@@ -41,8 +41,10 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     
     Boolean _isSetEnd;
     NSString *_distanceMsg;
-    
     UIColor *_defaultColor;
+    
+    FMKModel *_startModel;
+    FMKModel *_endModel;
 }
 @property (nonatomic,strong) FMKMapView *mapView;
 
@@ -350,6 +352,16 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     
     if (!_isSetEnd) {
  
+        // 添加终点
+        if(_startMarker)
+        {
+            [_imageLayer removeMarker:_startMarker];
+        }
+        if(_startModel)
+        {
+            _startModel.color = _defaultColor;
+        }
+        
         // 删除原来的marker和路径
         [_imageLayer removeMarker:_startMarker];
         _startMarker = nil;
@@ -357,12 +369,6 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
         _endMarker = nil;
         // 删除所有线标注
         [_mapView.map.lineLayer removeAll];
-        
-        NSArray *arraySearchResultModel = [_searchAnalyser getAllModelsWithGroupID:@"1"];
-        for (FMKModelSearchResult* result in arraySearchResultModel)
-        {
-            [modelLayer queryModelByFID:result.FID].color = _defaultColor;
-        }
         
         // 添加起点
         _startMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"start"] Coord:coord.mapPoint];
@@ -374,6 +380,7 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
         
         //设置颜色
         FMKModel* model = [modelLayer queryModelByFID:fmModel.FID];
+        _startModel = model;
         model.color = [UIColor redColor];
         model.selected = YES;
     }
@@ -382,6 +389,10 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
         if(_endMarker)
         {
             [_imageLayer removeMarker:_endMarker];
+        }
+        if(_endModel)
+        {
+            _endModel.color = _defaultColor;
         }
         
         _endMarker = [[FMKImageMarker alloc] initWithImage:[UIImage imageNamed:@"end"] Coord:coord.mapPoint];
@@ -396,7 +407,7 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
         FMKModel* model = [modelLayer queryModelByFID:fmModel.FID];
         model.color = [UIColor redColor];
         model.selected = YES;
-        
+        _endModel = model;
         // 添加线标注，规划路径
         [self naviRouteAnalyserWithStart:_startCoord end:_endCoord];
     }
