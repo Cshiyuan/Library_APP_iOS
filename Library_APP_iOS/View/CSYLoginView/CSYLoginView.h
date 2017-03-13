@@ -10,7 +10,7 @@
 #import "UIView+CSYBase.h"
 
 
-typedef void(^LoginAction)(NSString*,NSString*);
+typedef void(^LoginAction)(NSString* email,NSString* password);
 
 
 @interface CSYLoginView : UIView

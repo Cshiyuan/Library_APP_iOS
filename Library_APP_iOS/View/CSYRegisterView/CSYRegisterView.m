@@ -19,14 +19,6 @@
 
 @implementation CSYRegisterView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -39,17 +31,16 @@
     }
     return self;
 }
+
 #pragma -mark UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
     return YES;
 }
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == _repeatPasswordTextField)
-    {
+    if(textField == _repeatPasswordTextField) {
         [self registerAction:_registerButton];
     } else if (textField == _emailTextField) {
         [_passwordTextField becomeFirstResponder];

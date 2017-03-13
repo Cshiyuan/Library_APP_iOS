@@ -103,7 +103,7 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     [super viewDidAppear:animated];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL isLogin = [userDefaults boolForKey:@"isLogin"];
-    if(isLogin){
+    if(!isLogin){
 //    if(YES) {
         [self presentLoginViewController];
     }

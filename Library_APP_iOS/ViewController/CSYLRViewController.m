@@ -106,6 +106,7 @@
                 NSNumber *code = responseDic[@"data"][@"code"];
                 if ([code isEqualToNumber:@200])
                 {
+                    [weakSelf presentAlertControllerWithMessage:@"登陆成功" preferredStyle:UIAlertControllerStyleActionSheet];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setBool:YES forKey:@"isLogin"];
@@ -147,6 +148,7 @@
     [self showRegisterButton];
     
     __weak typeof(self) weakSelf = self;
+    
     [_registerView setRegisterAction:^(NSString *email, NSString *password, NSString *repassword,NSString* username) {
         
         if(![password isEqualToString:repassword])

@@ -33,5 +33,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma -mark 定制statusBar部分
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^RegisterAction)(NSString*,NSString*,NSString*,NSString*);
+typedef void(^RegisterAction)(NSString* email,NSString* password,NSString* repeatpassword,NSString* username);
 
 @interface CSYRegisterView : UIView
 
