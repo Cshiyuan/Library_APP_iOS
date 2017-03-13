@@ -60,20 +60,19 @@
 -(void)p_setBackGroundImageAndEffect
 {
     UIImage *background;
-    if(_backgroundImage) {
+    if(!_backgroundImage) {
         background = _backgroundImage;
     } else {
-        background = [UIImage imageNamed:@"cafedeadend"];
+        background = [UIImage imageNamed:@"background"];
     }
     UIImageView* backgroundImageView = [[UIImageView alloc]initWithImage:background];
     backgroundImageView.frame = self.view.frame;
     UIBlurEffect* blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
     visualEffectView.frame = backgroundImageView.frame;
-    visualEffectView.alpha = 1;
+    visualEffectView.alpha = 0.9;
     [backgroundImageView addSubview:visualEffectView];
     [self.view addSubview:backgroundImageView];
-    
 }
 #pragma -mark 设置登录View
 -(void)p_setLoginView
@@ -265,7 +264,6 @@
         [_registerView endEditing:YES];
     }
 }
-
 
 -(void)hideRegisterButton
 {
