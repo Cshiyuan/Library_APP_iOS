@@ -16,5 +16,6 @@
 
 - (void)presentViewController:(UIViewController*)vc;
 - (void)presentLoginViewController;
+-(void)presentAlertControllerWithMessage:(NSString *)msg preferredStyle:(UIAlertControllerStyle)style;
 
 @end

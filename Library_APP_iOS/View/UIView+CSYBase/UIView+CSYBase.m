@@ -17,6 +17,50 @@
     // Drawing code
 }
 */
+
+-(void)setKeyboardNotifiation
+{
+    //注册键盘出现的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillChange:)
+                                                     name:UIKeyboardDidChangeFrameNotification object:nil];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification object:nil];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
+    [self addGestureRecognizer:singleTap];
+}
+
+///键盘显示事件
+- (void) keyboardWillChange:(NSNotification *)notification {
+    CGFloat duration = [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    CGRect keyboardRect = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGFloat keyboardHeight = keyboardRect.origin.y;
+    double bHeight = CGRectGetMaxY(self.frame) - keyboardHeight;
+    if(bHeight > 0)
+    {
+        [UIView animateWithDuration:duration animations:^{
+            self.transform = CGAffineTransformMakeTranslation(0, -bHeight-10);
+        }];
+    }
+}
+
+//键盘消失事件
+- (void) keyboardWillHide:(NSNotification *)notify
+{
+    self.transform = CGAffineTransformIdentity;
+}
+
+
+-(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer
+{
+    
+    [self endEditing:YES];
+}
+
+
 +(instancetype)getView
 {
     NSBundle *bundle = [NSBundle mainBundle];

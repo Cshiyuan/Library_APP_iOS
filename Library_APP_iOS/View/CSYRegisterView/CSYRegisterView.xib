@@ -96,6 +96,10 @@
                 <outlet property="passwordTextField" destination="TvL-Uh-sQF" id="TfF-r8-IqG"/>
                 <outlet property="registerButton" destination="7S6-wa-VZ2" id="k0M-ZF-AyZ"/>
                 <outlet property="repeatPasswordTextField" destination="z9P-Bw-ohC" id="uIE-Bd-Rps"/>
+                <outlet property="staticEmailLabel" destination="ld4-Te-tww" id="2vs-oU-p0v"/>
+                <outlet property="staticPassWordLabel" destination="LcM-1q-qmZ" id="Ufg-we-TaI"/>
+                <outlet property="staticRePassWordLabel" destination="dPM-oA-Lwd" id="iDi-27-bzR"/>
+                <outlet property="staticTopicTitleLabel" destination="Jxw-ey-wxl" id="dMM-0c-H25"/>
             </connections>
             <point key="canvasLocation" x="-9" y="67"/>
         </view>

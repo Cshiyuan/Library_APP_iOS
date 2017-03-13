@@ -81,6 +81,7 @@
             <connections>
                 <outlet property="loginButton" destination="Flh-2I-uZT" id="IhJ-8u-g29"/>
                 <outlet property="passWord" destination="0tN-Dp-50I" id="3y8-vV-JVo"/>
+                <outlet property="staticTopicLabel" destination="ldP-zg-QGy" id="XTc-Bb-kvP"/>
                 <outlet property="userName" destination="H48-ay-CKV" id="qh7-9v-9sE"/>
             </connections>
             <point key="canvasLocation" x="-23" y="-24"/>

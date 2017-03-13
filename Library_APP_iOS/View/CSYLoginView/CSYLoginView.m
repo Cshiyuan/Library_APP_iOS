@@ -8,10 +8,10 @@
 
 #import "CSYLoginView.h"
 #import "Masonry.h"
+#import "UIView+CSYBase.h"
 
 @interface CSYLoginView() <UITextFieldDelegate>
 {
-    UIButton *_registerButton;
     LoginAction _loginAction;
 }
 
@@ -20,41 +20,17 @@
 
 @implementation CSYLoginView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 //重写initWithCoder:用代码添加子控件
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if(self)
     {
-        //you init
-        _registerButton = [[UIButton alloc]init];
-        _registerButton.layer.cornerRadius = 20;
-        _registerButton.alpha = 0.8;
-        [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
-        [_registerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_registerButton setBackgroundColor:[UIColor whiteColor]];
-        [self addSubview:_registerButton];
-        
-        //注册键盘出现的通知
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardDidChangeFrameNotification object:nil];
-        //注册键盘消失的通知
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification object:nil];
+//        [self setKeyboardNotifiation];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_passWord];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_userName];
         self.userInteractionEnabled = YES;
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
-        [self addGestureRecognizer:singleTap];
+
     }
     return self;
 }
@@ -89,18 +65,6 @@
     return YES;
 }
 
-//给子控件布局
-- (void)layoutSubviews
-{
-    [_registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@60);
-        make.height.equalTo(@60);
-        make.top.equalTo(_registerButton.superview.mas_top).offset(-20);
-        make.right.equalTo(_registerButton.superview.mas_right).offset(20);
-        
-    }];
-}
-
 -(void)loginAction:(UIButton *)button
 {
     if(_loginAction)
@@ -108,7 +72,6 @@
         _loginAction(_userName.text,_passWord.text);
     }
 }
-
 
 -(void)setLoginAction:(LoginAction)action
 {
@@ -128,31 +91,6 @@
     }
 }
 
--(void)fingerTapped:(UITapGestureRecognizer *)gestureRecognizer
-{
-    
-    [self endEditing:YES];
-}
-
-///键盘显示事件
-- (void) keyboardWillShow:(NSNotification *)notification {
-    CGFloat duration = [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
-    CGRect keyboardRect = [notification.userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    CGFloat keyboardHeight = keyboardRect.origin.y;
-    double bHeight = CGRectGetMaxY(self.frame) - keyboardHeight;
-    if(bHeight > 0)
-    {
-        [UIView animateWithDuration:duration animations:^{
-            self.transform = CGAffineTransformMakeTranslation(0, -bHeight-10);
-        }];
-    }
-}
-
-///键盘消失事件
-- (void) keyboardWillHide:(NSNotification *)notify {
-    
-    self.transform = CGAffineTransformIdentity;
-}
 
 
 

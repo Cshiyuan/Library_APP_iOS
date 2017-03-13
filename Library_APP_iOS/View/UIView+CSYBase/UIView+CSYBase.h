@@ -12,4 +12,6 @@
 
 +(instancetype)getView;
 -(void)setGradientColorWith:(UIColor*) startColor toColor:(UIColor*) endColor WithAlpha:(double)alpha;
+
+-(void)setKeyboardNotifiation;
 @end

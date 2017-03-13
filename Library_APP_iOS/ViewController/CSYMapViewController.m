@@ -103,7 +103,8 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
     [super viewDidAppear:animated];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL isLogin = [userDefaults boolForKey:@"isLogin"];
-    if(!isLogin){
+//    if(isLogin){
+    if(YES) {
         [self presentLoginViewController];
     }
 }
@@ -238,7 +239,6 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
             NSString* msg = [NSString stringWithFormat:@"%@ 所在书架：%@ \n%@",info.bookName,info.slfName,_distanceMsg];
             [self showInfoViewWithAnimationByMessage:msg];
         });
-        
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:info.slfName];
     };
@@ -260,7 +260,6 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
             NSString* msg = [NSString stringWithFormat:@"%@ 所在书架：%@ \n%@",info.bookName,info.slfName,_distanceMsg];
             [self showInfoViewWithAnimationByMessage:msg];
         });
-
         //设置搜索条件，搜索多个用"|"号分开
         [weakSelf searchModelByKeyWords:info.slfName];
     };
@@ -312,7 +311,6 @@ const static float ShowInfoViewHeight = 40;  //信息显示view的大小
         default:
             break;
     }
-    
 }
 
 #pragma mark - FMKNaviAnalyserDelegate

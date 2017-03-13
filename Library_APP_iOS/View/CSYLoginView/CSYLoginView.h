@@ -12,12 +12,15 @@
 
 typedef void(^LoginAction)(NSString*,NSString*);
 
+
 @interface CSYLoginView : UIView
 
 @property (weak, nonatomic) IBOutlet UITextField *userName;
 @property (weak, nonatomic) IBOutlet UITextField *passWord;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UILabel *staticTopicLabel;
 
-//+(instancetype)getCSYLoginView;
 -(void)setLoginAction:(LoginAction)action;
+
+
 @end

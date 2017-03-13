@@ -591,10 +591,10 @@
 		3D807B5A1E6818020013E4B3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3D807B5C1E6818020013E4B3 /* CSYLoginView */,
 				3D3040E61E7454FF00AD35A5 /* CSYRegisterView */,
 				3DB0E34B1E71521900808264 /* UISearchBar+CSYBase */,
 				3D807B621E6818720013E4B3 /* UIView+CSYBase */,
-				3D807B5C1E6818020013E4B3 /* CSYLoginView */,
 				3DB0E34F1E715A9300808264 /* NothingFoundCell.xib */,
 			);
 			path = View;

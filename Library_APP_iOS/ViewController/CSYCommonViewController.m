@@ -109,5 +109,20 @@ static NSOperationQueue *sRequestQueue = nil;
     }
 }
 
+-(void)presentAlertControllerWithMessage:(NSString *)msg preferredStyle:(UIAlertControllerStyle)style
+{
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"提示" message:msg preferredStyle:style];
+    [self presentViewController:alertController animated:YES completion:nil];
+//    + (instancetype)alertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(creatAlert:) userInfo:alertController repeats:NO];
+}
+
+- (void)creatAlert:(NSTimer *)timer{
+    
+    UIAlertController *alert = [timer userInfo];
+    [alert dismissViewControllerAnimated:YES completion:nil];
+    alert = nil;
+    
+}
 
 @end
