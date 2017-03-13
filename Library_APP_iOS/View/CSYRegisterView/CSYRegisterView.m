@@ -32,8 +32,6 @@
     self = [super initWithCoder:aDecoder];
     if(self)
     {
-        //you init
-//        [self setKeyboardNotifiation];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_passwordTextField];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_repeatPasswordTextField];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_emailTextField];
@@ -52,11 +50,13 @@
 {
     if(textField == _repeatPasswordTextField)
     {
-    } else if (textField == _emailTextField){
+        [self registerAction:_registerButton];
+    } else if (textField == _emailTextField) {
         [_passwordTextField becomeFirstResponder];
-    } else if(textField == _passwordTextField)
-    {
+    } else if (textField == _passwordTextField) {
         [_repeatPasswordTextField becomeFirstResponder];
+    } else if(textField == _usernameTextField) {
+        [_emailTextField becomeFirstResponder];
     }
     return YES;
 }
@@ -71,6 +71,7 @@
     _passwordTextField.secureTextEntry = YES;
     _repeatPasswordTextField.secureTextEntry = YES;
     
+    _usernameTextField.delegate = self;
     _emailTextField.delegate = self;
     _repeatPasswordTextField.delegate = self;
     _passwordTextField.delegate = self;
@@ -80,7 +81,7 @@
 {
     if(_registerAction)
     {
-        _registerAction(_emailTextField.text,_passwordTextField.text,_repeatPasswordTextField.text);
+        _registerAction(_emailTextField.text,_passwordTextField.text,_repeatPasswordTextField.text,_usernameTextField.text);
     }
 }
 
@@ -95,7 +96,7 @@
 #pragma -mark NSNotification
 -(void)textFieldChanged:(UITextField*)textField
 {
-    if(![_passwordTextField.text isEqualToString:@""] && ![_emailTextField.text isEqualToString:@""] && ![_repeatPasswordTextField.text isEqualToString:@""])
+    if(![_passwordTextField.text isEqualToString:@""] && ![_emailTextField.text isEqualToString:@""] && ![_repeatPasswordTextField.text isEqualToString:@""] &&! [_usernameTextField.text isEqualToString:@""])
     {
         _registerButton.userInteractionEnabled = YES;
         _registerButton.alpha = 1.0;

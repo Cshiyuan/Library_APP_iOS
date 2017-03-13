@@ -117,10 +117,12 @@
                     [weakSelf presentAlertControllerWithMessage:msg preferredStyle:UIAlertControllerStyleAlert];
                 }
                 NSLog(@"%@",code);
-                [weakSelf stopLoadingWithIndicator];
+                
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 [weakSelf presentAlertControllerWithMessage:@"网络错误" preferredStyle:UIAlertControllerStyleAlert];
             }];
+        
+        [weakSelf stopLoadingWithIndicator];
     }];
 }
 #pragma -mark  设置注册View
@@ -129,12 +131,9 @@
     _registerView = [CSYRegisterView getView];
     _registerView.layer.cornerRadius = 10;
     _registerView.alpha = 0.8;
-    _registerView.staticEmailLabel.text = @"";
-    _registerView.staticPassWordLabel.text = @"";
-    _registerView.staticRePassWordLabel.text = @"";
     _registerView.staticTopicTitleLabel.text = @"";
     
-    _registerView.frame = CGRectMake(SCREEN_WIDTH * 0.1, SCREEN_HEIGHT/2 - SCREEN_WIDTH * 0.4, 0, SCREEN_WIDTH * 0.8);
+    _registerView.frame = CGRectMake(SCREEN_WIDTH * 0.1, SCREEN_HEIGHT/2 - SCREEN_WIDTH * 0.4, 0, SCREEN_WIDTH * 0.8 + 20);
     
     [self.view addSubview:_registerView];
     
@@ -147,22 +146,47 @@
     [_loginButton addTarget:self action:@selector(hideRegisterView) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginButton];
     [self showRegisterButton];
-
     
+    __weak typeof(self) weakSelf = self;
+    [_registerView setRegisterAction:^(NSString *email, NSString *password, NSString *repassword,NSString* username) {
+        
+        if(![password isEqualToString:repassword])
+        {
+            [weakSelf presentAlertControllerWithMessage:@"两次输入密码不相同" preferredStyle:UIAlertControllerStyleAlert];
+            return ;
+        }
+        
+        [weakSelf startLoadingWithIndicator];
+        [[CSYHTTPClient defaultClient]getPath:REGISTER_URL parameters:@{@"email": email,@"password":password,@"username":username} success:^(NSURLSessionDataTask *task, id responseObject) {
+            if (![responseObject isKindOfClass:[NSDictionary class]]) {
+                
+            }
+            NSDictionary *responseDic = responseObject;
+            NSNumber *code = responseDic[@"data"][@"code"];
+            if ([code isEqualToNumber:@200])
+            {
+                [weakSelf presentAlertControllerWithMessage:@"注册成功" preferredStyle:UIAlertControllerStyleAlert];
+            }
+            else
+            {
+                NSString *msg = responseDic[@"data"][@"msg"];
+                [weakSelf presentAlertControllerWithMessage:msg preferredStyle:UIAlertControllerStyleAlert];
+            }
+            NSLog(@"%@",code);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [weakSelf presentAlertControllerWithMessage:@"网络错误" preferredStyle:UIAlertControllerStyleAlert];
+        }];
+        [weakSelf stopLoadingWithIndicator];
+    }];
 
 }
 -(void)showRegisterView
 {
-    
-    _registerView.staticEmailLabel.text = @"邮箱";
-    _registerView.staticPassWordLabel.text = @"密码";
-    _registerView.staticRePassWordLabel.text = @"密码";
     _registerView.staticTopicTitleLabel.text = @"注册";
     _loginView.staticTopicLabel.text = @"";
-    
     [UIView animateWithDuration:1 animations:^{
         
-        _registerView.frame = CGRectMake(_loginView.frame.origin.x, _loginView.frame.origin.y, SCREEN_WIDTH * 0.8, SCREEN_WIDTH * 0.8);
+        _registerView.frame = CGRectMake(_loginView.frame.origin.x, _loginView.frame.origin.y, SCREEN_WIDTH * 0.8, SCREEN_WIDTH * 0.8 + 20);
         
         CGRect rect = _loginView.frame;
         rect.size.width = 0;
@@ -174,15 +198,11 @@
 
 -(void)hideRegisterView
 {
-    _registerView.staticEmailLabel.text = @"";
-    _registerView.staticPassWordLabel.text = @"";
-    _registerView.staticRePassWordLabel.text = @"";
     _registerView.staticTopicTitleLabel.text = @"";
     _loginView.staticTopicLabel.text = @"登陆";
-    
     [UIView animateWithDuration:1 animations:^{
         
-        _registerView.frame = CGRectMake(_loginView.frame.origin.x, _loginView.frame.origin.y, 0, SCREEN_WIDTH * 0.8);
+        _registerView.frame = CGRectMake(_loginView.frame.origin.x, _loginView.frame.origin.y, 0, SCREEN_WIDTH * 0.8 + 20);
         
         CGRect rect = _loginView.frame;
         rect.size.width = SCREEN_WIDTH * 0.8;
@@ -209,10 +229,10 @@
     {
         [UIView animateWithDuration:durition animations:^{
         
-            _registerView.transform = CGAffineTransformMakeTranslation(0, -_moveHeight);
-            _loginView.transform = CGAffineTransformMakeTranslation(0, -_moveHeight);
-            _registerButton.transform = CGAffineTransformMakeTranslation(0, -_moveHeight);
-            _loginButton.transform = CGAffineTransformMakeTranslation(0, -_moveHeight);
+            _registerView.transform = CGAffineTransformMakeTranslation(0, -_moveHeight-20);
+            _loginView.transform = CGAffineTransformMakeTranslation(0, -_moveHeight-20);
+            _registerButton.transform = CGAffineTransformMakeTranslation(0, -_moveHeight-20);
+            _loginButton.transform = CGAffineTransformMakeTranslation(0, -_moveHeight-20);
         
         }];
     }
@@ -261,4 +281,9 @@
     _loginButton.frame = CGRectMake(CGRectGetMaxX(_registerView.frame)-30, CGRectGetMinY(_registerView.frame)-30, 0, 60);
 }
 
+#pragma -mark 定制statusBar部分
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^RegisterAction)(NSString*,NSString*,NSString*);
+typedef void(^RegisterAction)(NSString*,NSString*,NSString*,NSString*);
 
 @interface CSYRegisterView : UIView
 
@@ -16,12 +16,15 @@ typedef void(^RegisterAction)(NSString*,NSString*,NSString*);
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *repeatPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *staticEmailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *staticPassWordLabel;
 @property (weak, nonatomic) IBOutlet UILabel *staticRePassWordLabel;
 @property (weak, nonatomic) IBOutlet UILabel *staticTopicTitleLabel;
+
+
 
 -(void)setRegisterAction:(RegisterAction)action;
 
