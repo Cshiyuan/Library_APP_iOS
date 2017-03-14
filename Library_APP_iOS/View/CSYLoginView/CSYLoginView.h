@@ -22,5 +22,4 @@ typedef void(^LoginAction)(NSString* email,NSString* password);
 
 -(void)setLoginAction:(LoginAction)action;
 
-
 @end

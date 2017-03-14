@@ -93,7 +93,6 @@
     if (_bookArray.count == 0) {
         return _bookTableView.frame.size.height;
     }
-    
     return 100;
 }
 
@@ -101,6 +100,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld",(long)indexPath.row);
+    if(_bookArray.count == 0)
+    {
+        [_searchBar resignFirstResponder];
+        return ;
+    }
     [_searchBar resignFirstResponder];
     if(_bookInfoBlock)
     {
@@ -160,7 +164,6 @@
     }];
 
 }
-
 
 -(void)crossButtonAction:(UIButton*)btn
 {

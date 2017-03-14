@@ -26,11 +26,9 @@
     self = [super initWithCoder:aDecoder];
     if(self)
     {
-//        [self setKeyboardNotifiation];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_passWord];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:_userName];
         self.userInteractionEnabled = YES;
-
     }
     return self;
 }
