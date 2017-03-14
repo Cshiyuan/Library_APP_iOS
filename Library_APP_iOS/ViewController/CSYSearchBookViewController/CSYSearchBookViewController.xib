@@ -15,6 +15,8 @@
                 <outlet property="_bookTableView" destination="haR-Es-wuv" id="F4l-Tf-tm0"/>
                 <outlet property="_crossButton" destination="JqL-KY-a5u" id="bD9-Mu-HoG"/>
                 <outlet property="_searchBar" destination="HA1-fX-Ifg" id="gx1-4u-CRe"/>
+                <outlet property="_topNavigationView" destination="RnG-QF-RXE" id="U35-Gl-3dd"/>
+                <outlet property="topNaivgationViewHeight" destination="nCn-k0-S3o" id="xBH-Gm-uIz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="4RX-vX-3ku"/>
             </connections>
         </placeholder>
@@ -23,13 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUs-WZ-Xci">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                    <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="VYG-4D-xgu"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RnG-QF-RXE">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <subviews>
@@ -62,13 +57,20 @@
                         <constraint firstAttribute="height" constant="44" id="N8s-Kb-lMa"/>
                     </constraints>
                     <color key="tintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="barTintColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="haR-Es-wuv">
                     <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUs-WZ-Xci">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                    <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="VYG-4D-xgu"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>

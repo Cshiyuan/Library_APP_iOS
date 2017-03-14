@@ -22,11 +22,12 @@
 
 @interface CSYSearchBookViewController () <UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
+    __weak IBOutlet UIView *_topNavigationView;
     __weak IBOutlet UIButton *_crossButton;
     __weak IBOutlet UISearchBar *_searchBar;
     __weak IBOutlet UITableView *_bookTableView;
-    
     NSMutableArray *_bookArray;
+    __weak IBOutlet NSLayoutConstraint *topNaivgationViewHeight;
 }
 
 @end
@@ -122,15 +123,22 @@
 }
 
 
-#pragma -mark UISearchResultsUpdating
+#pragma -mark UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"search : %@",searchBar.text);
     [_bookArray removeAllObjects];
     [_searchBar resignFirstResponder];
     [self loadingBookInfo:searchBar.text];
-    
 }
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"beginEditing");
+    topNaivgationViewHeight.constant = 0;
+    return YES;
+}
+
 #pragma -mark 根据关键字从远程加载数据
 -(void)loadingBookInfo:(NSString*)keyWord
 {
