@@ -16,7 +16,6 @@
 
 
 #define cellIdentify @"BookInfoIdentifier"
-//#define searchResultCellIdentifiers = @"SearchResultCell"
 #define nothingFoundCellIdentifiers @"NothingFoundCell"
 
 
