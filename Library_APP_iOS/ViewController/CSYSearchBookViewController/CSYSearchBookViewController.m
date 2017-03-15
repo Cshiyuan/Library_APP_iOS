@@ -131,8 +131,15 @@
 {
     NSLog(@"beginEditing");
 //    hideTopTitleView
+    [_bookArray removeAllObjects];
+    [_bookTableView reloadData];
     [self hideTopTitleView];
     return YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"cancelButtonClicked");
 }
 
 #pragma -mark 根据关键字从远程加载数据
@@ -184,7 +191,7 @@
     if(topNaivgationViewHeight.constant == 0)
     {
         topNaivgationViewHeight.constant = 44.0;
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             
             CGRect frame_t = _topNavigationView.frame;
             frame_t.size.height = 44;
@@ -194,9 +201,12 @@
             frame_s.origin.y = frame_s.origin.y + 44;
             _searchBar.frame = frame_s;
             
+            CGRect frame_a = _bookTableView.frame;
+            frame_a.origin.y += 44;
+            _bookTableView.frame = frame_a;
+            
             _crossButton.hidden = YES;
         } completion:^(BOOL finished) {
-            
             _crossButton.hidden = NO;
         }];
     }
@@ -207,13 +217,19 @@
 {
     if(topNaivgationViewHeight.constant == 44.0)
     {
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:0.3 animations:^{
             CGRect frame_t = _topNavigationView.frame;
             frame_t.size.height = 0;
             _topNavigationView.frame = frame_t;
+            
             CGRect frame_s = _searchBar.frame;
             frame_s.origin.y = frame_s.origin.y - 44;
             _searchBar.frame = frame_s;
+            
+            CGRect frame_a = _bookTableView.frame;
+            frame_a.origin.y -= 44;
+            _bookTableView.frame = frame_a;
+            
             _crossButton.hidden = YES;
         } completion:^(BOOL finished) {
             topNaivgationViewHeight.constant = 0.0;
