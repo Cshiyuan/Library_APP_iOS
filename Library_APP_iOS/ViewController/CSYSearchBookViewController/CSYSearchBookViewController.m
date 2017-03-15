@@ -64,20 +64,15 @@
     {
         UITableViewCell *nothingFoundCell =  [_bookTableView dequeueReusableCellWithIdentifier:nothingFoundCellIdentifiers forIndexPath:indexPath];
         nothingFoundCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
         return nothingFoundCell;
     }
-    
     CSYBookInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
     if(!cell)
     {
         [tableView registerNib:[UINib nibWithNibName:@"CSYBookInfoCell" bundle:nil] forCellReuseIdentifier:cellIdentify];
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
-        
     }
-    
     [self configCell:cell With:_bookArray[indexPath.row]];
-    
     return cell;
 }
 
@@ -103,6 +98,7 @@
     if(_bookArray.count == 0)
     {
         [_searchBar resignFirstResponder];
+        [self showTopTitleView];
         return ;
     }
     [_searchBar resignFirstResponder];
@@ -134,7 +130,8 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     NSLog(@"beginEditing");
-    topNaivgationViewHeight.constant = 0;
+//    hideTopTitleView
+    [self hideTopTitleView];
     return YES;
 }
 
@@ -149,7 +146,6 @@
         }
         NSDictionary *responseDic = responseObject;
         NSNumber *code = responseDic[@"data"][@"code"];
-        
         if ([code isEqualToNumber:@200])
         {
             NSArray *datas = responseDic[@"data"][@"info"];
@@ -161,7 +157,6 @@
             
             [_bookTableView reloadData];
         }
-        
         [self stopLoadingWithIndicator];
         [_bookTableView reloadData];
         
@@ -182,6 +177,49 @@
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+-(void)showTopTitleView
+{
+    if(topNaivgationViewHeight.constant == 0)
+    {
+        topNaivgationViewHeight.constant = 44.0;
+        [UIView animateWithDuration:1.0 animations:^{
+            
+            CGRect frame_t = _topNavigationView.frame;
+            frame_t.size.height = 44;
+            _topNavigationView.frame = frame_t;
+            
+            CGRect frame_s = _searchBar.frame;
+            frame_s.origin.y = frame_s.origin.y + 44;
+            _searchBar.frame = frame_s;
+            
+            _crossButton.hidden = YES;
+        } completion:^(BOOL finished) {
+            
+            _crossButton.hidden = NO;
+        }];
+    }
+}
+
+
+-(void)hideTopTitleView
+{
+    if(topNaivgationViewHeight.constant == 44.0)
+    {
+        [UIView animateWithDuration:1.0 animations:^{
+            CGRect frame_t = _topNavigationView.frame;
+            frame_t.size.height = 0;
+            _topNavigationView.frame = frame_t;
+            CGRect frame_s = _searchBar.frame;
+            frame_s.origin.y = frame_s.origin.y - 44;
+            _searchBar.frame = frame_s;
+            _crossButton.hidden = YES;
+        } completion:^(BOOL finished) {
+            topNaivgationViewHeight.constant = 0.0;
+            _crossButton.hidden = NO;
+        }];
+    }
 }
 
 @end
