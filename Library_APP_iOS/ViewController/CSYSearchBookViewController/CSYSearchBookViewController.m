@@ -45,7 +45,6 @@
     [_searchBar removeBorderWithBackgroundColor:[UIColor colorWithRed:(146.0/255.0) green:(146.0/255.0) blue:(146.0/255.0) alpha:1 ]];
     _bookTableView.delegate = self;
     _bookTableView.dataSource = self;
-    
     //有传递值
     if(_keyWorkForSearch)
     {
@@ -91,7 +90,6 @@
     return 100;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%ld",(long)indexPath.row);
@@ -130,7 +128,6 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     NSLog(@"beginEditing");
-//    hideTopTitleView
     [_bookArray removeAllObjects];
     [_bookTableView reloadData];
     [self hideTopTitleView];
